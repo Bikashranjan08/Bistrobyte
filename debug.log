@@ -1,0 +1,227 @@
+2026-02-06T06:39:27.395Z [console][error] The resource https://vercel.com/_next/static/media/ebay-dark.c7572b4c.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:27.149Z [console][error] The resource https://vercel.com/_next/static/chunks/ad643eac1f82b82a.css?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:27.149Z [console][error] The resource https://vercel.com/_next/static/media/stripe-dark.aebeabe0.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:27.150Z [console][error] The resource https://vercel.com/_next/static/media/stripe-light.4919d80b.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:27.150Z [console][error] The resource https://vercel.com/_next/static/chunks/37dab1a72c7560e7.css?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:27.150Z [console][error] The resource https://vercel.com/_next/static/chunks/e0c6450002eea1fe.css?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:27.150Z [console][error] The resource https://vercel.com/_next/static/media/ebay-light.a2d1b485.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:27.150Z [console][error] The resource https://vercel.com/_next/static/media/ebay-dark.c7572b4c.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:59.933Z [console][error] The resource https://vercel.com/_next/static/chunks/ad643eac1f82b82a.css?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:59.933Z [console][error] The resource https://vercel.com/_next/static/media/stripe-dark.aebeabe0.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:59.933Z [console][error] The resource https://vercel.com/_next/static/media/stripe-light.4919d80b.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:59.933Z [console][error] The resource https://vercel.com/_next/static/chunks/37dab1a72c7560e7.css?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:59.933Z [console][error] The resource https://vercel.com/_next/static/chunks/e0c6450002eea1fe.css?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:59.933Z [console][error] The resource https://vercel.com/_next/static/media/ebay-light.a2d1b485.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:41:59.934Z [console][error] The resource https://vercel.com/_next/static/media/ebay-dark.c7572b4c.svg?dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ&dpl=dpl_2PJzEisHoo6ba75dhEpEhYb278AQ was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+2026-02-06T06:43:06.529Z [console][error] Uncaught Error: ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/ContactSection'
+  3 | import CategoryPreview from "@/components/CategoryPreview";
+  4 | import AboutSection from "@/components/AboutSection";
+> 5 | import ContactSection from "@/components/ContactSection";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import Footer from "@/components/Footer";
+  7 |
+  8 | export default function Home() {
+
+Import map: aliased to relative './src/components/ContactSection' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+2026-02-06T06:43:06.540Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/ContactSection'
+  3 | import CategoryPreview from "@/components/CategoryPreview";
+  4 | import AboutSection from "@/components/AboutSection";
+> 5 | import ContactSection from "@/components/ContactSection";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import Footer from "@/components/Footer";
+  7 |
+  8 | export default function Home() {
+
+Import map: aliased to relative './src/components/ContactSection' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.540Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/Footer'
+  4 | import AboutSection from "@/components/AboutSection";
+  5 | import ContactSection from "@/components/ContactSection";
+> 6 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function Home() {
+  9 |   return (
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.639Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/ContactSection'
+  3 | import CategoryPreview from "@/components/CategoryPreview";
+  4 | import AboutSection from "@/components/AboutSection";
+> 5 | import ContactSection from "@/components/ContactSection";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import Footer from "@/components/Footer";
+  7 |
+  8 | export default function Home() {
+
+Import map: aliased to relative './src/components/ContactSection' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.639Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/Footer'
+  4 | import AboutSection from "@/components/AboutSection";
+  5 | import ContactSection from "@/components/ContactSection";
+> 6 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function Home() {
+  9 |   return (
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:44:18.094Z [console][error] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree.
+2026-02-06T06:44:18.099Z [console][error] [Fast Refresh] performing full reload because your application had an unrecoverable error
+2026-02-06T06:43:06.541Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/Footer'
+  4 | import AboutSection from "@/components/AboutSection";
+  5 | import ContactSection from "@/components/ContactSection";
+> 6 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function Home() {
+  9 |   return (
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.640Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/ContactSection'
+  3 | import CategoryPreview from "@/components/CategoryPreview";
+  4 | import AboutSection from "@/components/AboutSection";
+> 5 | import ContactSection from "@/components/ContactSection";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import Footer from "@/components/Footer";
+  7 |
+  8 | export default function Home() {
+
+Import map: aliased to relative './src/components/ContactSection' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.640Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/Footer'
+  4 | import AboutSection from "@/components/AboutSection";
+  5 | import ContactSection from "@/components/ContactSection";
+> 6 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function Home() {
+  9 |   return (
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:44:18.094Z [console][error] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree.
+2026-02-06T06:44:18.099Z [console][error] [Fast Refresh] performing full reload because your application had an unrecoverable error
+2026-02-06T06:43:06.541Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/Footer'
+  4 | import AboutSection from "@/components/AboutSection";
+  5 | import ContactSection from "@/components/ContactSection";
+> 6 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function Home() {
+  9 |   return (
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.640Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/ContactSection'
+  3 | import CategoryPreview from "@/components/CategoryPreview";
+  4 | import AboutSection from "@/components/AboutSection";
+> 5 | import ContactSection from "@/components/ContactSection";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import Footer from "@/components/Footer";
+  7 |
+  8 | export default function Home() {
+
+Import map: aliased to relative './src/components/ContactSection' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.640Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/Footer'
+  4 | import AboutSection from "@/components/AboutSection";
+  5 | import ContactSection from "@/components/ContactSection";
+> 6 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function Home() {
+  9 |   return (
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:44:18.094Z [console][error] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree.
+2026-02-06T06:44:18.099Z [console][error] [Fast Refresh] performing full reload because your application had an unrecoverable error
+2026-02-06T06:43:06.541Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/Footer'
+  4 | import AboutSection from "@/components/AboutSection";
+  5 | import ContactSection from "@/components/ContactSection";
+> 6 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function Home() {
+  9 |   return (
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.640Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/ContactSection'
+  3 | import CategoryPreview from "@/components/CategoryPreview";
+  4 | import AboutSection from "@/components/AboutSection";
+> 5 | import ContactSection from "@/components/ContactSection";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import Footer from "@/components/Footer";
+  7 |
+  8 | export default function Home() {
+
+Import map: aliased to relative './src/components/ContactSection' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:43:06.640Z [console][error] ./orchids-projects/cloud-kitchen-menu/src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/Footer'
+  4 | import AboutSection from "@/components/AboutSection";
+  5 | import ContactSection from "@/components/ContactSection";
+> 6 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function Home() {
+  9 |   return (
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
+
+https://nextjs.org/docs/messages/module-not-found
