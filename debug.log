@@ -225,3 +225,38 @@ Module not found: Can't resolve '@/components/Footer'
 Import map: aliased to relative './src/components/Footer' inside of [project]/orchids-projects/cloud-kitchen-menu
 
 https://nextjs.org/docs/messages/module-not-found
+2026-02-06T06:54:01.241Z [console][error] Image with src "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T06:54:01.252Z [console][error] Image with src "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T06:54:01.253Z [console][error] Image with src "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T06:54:01.253Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T06:54:01.172Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/#about" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main data-orchids-id="src\app\pa..." data-orchids-name="main">
+                              ...
+                                <nav data-orchids-id="src\compon..." data-orchids-name="motion.nav" ...>
+                                  <div data-orchids-id="src\compon..." data-orchids-name="div" className="max-w-7xl ...">
+                            ...
