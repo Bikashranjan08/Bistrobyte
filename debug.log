@@ -260,3 +260,480 @@ It can also happen if the client has a browser extension installed which messes 
                                 <nav data-orchids-id="src\compon..." data-orchids-name="motion.nav" ...>
                                   <div data-orchids-id="src\compon..." data-orchids-name="div" className="max-w-7xl ...">
                             ...
+2026-02-06T12:36:52.065Z [console][error] Image with src "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:36:52.065Z [console][error] Image with src "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:36:52.065Z [console][error] Image with src "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:36:52.065Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:36:51.961Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/#contact" tree={[...]} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main data-orchids-id="src\app\pa..." data-orchids-name="main">
+                              ...
+                                <nav data-orchids-id="src\compon..." data-orchids-name="motion.nav" ...>
+                                  <div data-orchids-id="src\compon..." data-orchids-name="div" className="max-w-7xl ...">
+                                    <div d...
+2026-02-06T12:39:07.948Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/#contact" tree={[...]} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main
+                              data-orchids-id="src\app\page.tsx:10:4"
+                              data-orchids-name="main"
+-                             data-orchid-ref="ref-41namwmec7"
+                            >
+                              <Navbar data-orchids-id="src\app\pa..." data-orchids-name="Navbar">
+                                <motion.nav data-orchids-id="src\compon..." data-orchids-name="motion.nav" ...>
+                                  <nav
+                                    data-orchids-id="src\components\Navbar.tsx:28:4"
+                                    data-orchids-name="motion.nav"
+                                    className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-cream/60..."
+                                    style={{transform:"translateY..."}}
+                                    ref={function useMotionRef.useCallback}
+-                                   data-orchid-ref="ref-8s5e2q3len"
+                                  >
+                                    <div
+                                      data-orchids-id="src\components\Navbar.tsx:38:6"
+                                      data-orchids-name="div"
+                                      className="max-w-7xl mx-auto px-6 lg:px-8"
+-                                     data-orchid-ref="ref-wq6bq9a2j9"
+                                    >
+                                      <div
+                                        data-orchids-id="src\components\Navbar.tsx:39:8"
+                                        data-orchids-name="div"
+                                        className="flex items-center justify-between h-[72px]"
+-                                       data-orchid-ref="ref-1kh9df66jl"
+                                      >
+                                        <LinkComponent data-orchids-id="src\compon..." data-orchids-name="Link" href="/" ...>
+                                          <a
+                                            data-orchids-id="src\components\Navbar.tsx:41:10"
+                                            data-orchids-name="Link"
+                                            className="flex items-center gap-2 group shrink-0"
+                                            ref={function}
+                                            onClick={function onClick}
+                       ... [truncated]
+2026-02-06T12:39:07.978Z [console][error] Image with src "/paneer-handi.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:39:31.995Z [console][error] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2026-02-06T12:39:32.099Z [console][error] Image with src "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:39:32.099Z [console][error] Image with src "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:39:32.099Z [console][error] Image with src "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:39:32.100Z [console][error] Image with src "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:39:32.100Z [console][error] Image with src "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:39:32.100Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:39:07.948Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/#contact" tree={[...]} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main
+                              data-orchids-id="src\app\page.tsx:10:4"
+                              data-orchids-name="main"
+-                             data-orchid-ref="ref-41namwmec7"
+                            >
+                              <Navbar data-orchids-id="src\app\pa..." data-orchids-name="Navbar">
+                                <motion.nav d...
+2026-02-06T12:50:13.736Z [console][error] Image with src "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:13.736Z [console][error] Image with src "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:13.736Z [console][error] Image with src "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:13.736Z [console][error] Image with src "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:13.736Z [console][error] Image with src "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:13.736Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.241Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main data-orchids-id="src\app\pa..." data-orchids-name="main">
+                              ...
+                                <nav data-orchids-id="src\compon..." data-orchids-name="motion.nav" ...>
+                                  <div data-orchids-id="src\compon..." data-orchids-name="div" className="max-w-7xl ...">
+                                    <div data-orchids-id="src\compon..." data-orchids-name="div" ...>
+                                      <LinkComponent>
+                                      <div>
+                                      <div data-orchids-id="src\compon..." data-orchids-name="div" ...>
+                                        <button data-orchids-id="src\compon..." data-orchids-name="button" ...>
+                                          <Search data-orchids-id="src\compon..." data-orchids-name="Search" size={20} ...>
+                                            <svg
+                                              ref={null}
+                                              xmlns="http://www.w3.org/2000/svg"
+                                              width={20}
+                                              height={20}
+                                              viewBox="0 0 24 24"
+                                              fill="none"
+                                              stroke="currentColor"
+                                              strokeWidth={1.8}
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              className="lucide lucide-search"
+                                              aria-hidden="true"
+                                              data-orchids-id="src\components\Navbar.tsx:85:14"
+                                              data-orchids-name="Search"
+-                                             data-orchid-ref="ref-rq31vumklz"
+                                            >
+                                              <path
+                                                d="m21 21-4.34-4.34"
+-                                               data-orchid-ref="ref-bcpkz7uki2"
+                                              >
+                                              <circle
+                                                cx="11"
+ ... [truncated]
+2026-02-06T12:50:14.257Z [console][error] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2026-02-06T12:50:14.329Z [console][error] Image with src "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.329Z [console][error] Image with src "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.330Z [console][error] Image with src "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.330Z [console][error] Image with src "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.330Z [console][error] Image with src "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.330Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.243Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main data-orchids-id="src\app\pa..." data-orchids-name="main">
+                              ...
+                                <nav data-orchids-id="src\compon..." data-orchids-name="motion.nav" ...>
+                                  <div data-orchids-id="src\compon..." data-orchids-name="div" className="max-w-7xl ...">
+                                  ...
+2026-02-06T12:50:14.345Z [network][POST 200] /__nextjs_original-stack-frames
+  request: {"frames":[{"file":"https://react.dev/link/hydration-mismatch","line1":null,"column1":null,"methodName":"<unknown>","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_b2de8b52._.js","line1":1605,"column1":71,"methodName":"createConsoleError","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_b2de8b52._.js","line1":2203,"column1":54,"methodName":"handleConsoleError","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_b2de8b52._.js","line1":2354,"column1":57,"methodName":"console.error","arguments":[]},{"file":"<anonymous>","line1":86,"column1":44,"methodName":"console.error","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_compiled_react-dom_7da552a2._.js","line1":3013,"column1":25,"methodName":"<unknown>","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_compiled_react-dom_7da552a2._.js","line1":886,"column1":74,"methodName":"runWithFiberInDEV","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_compiled_react-dom_7da552a2._.js","line1":3012,"column1":13,"methodName":"emitPendingHydrationWarnings","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_compiled_react-dom_7da552a2._.js","line1":6296,"column1":102,"methodName":"completeWork","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_compiled_react-dom_7da552a2._.js","line1":886,"column1":131,"methodName":"runWithFiberInDEV","arguments":[]},{"file":"file://C:/Users/patra/orchids-projects/cloud-kitchen-menu/.next/static/chunks/74fb2_next_dist_compiled_react-dom_7da552a2._.js","line... [truncated]
+  response: [{"status":"rejected","reason":"[Error: Unknown url scheme 'https'\n\nDebug info:\n- Execution of TaskId { id: 2147484630 } transient failed\n- Execution of project_trace_source_operation failed\n- Execution of *SourceMap::new_from_rope_cached failed\n- Execution of get_source_map_rope failed\n- Unknown url scheme 'https'] {\n  code: 'GenericFailure'\n}"},{"status":"fulfilled","value":{"originalStackFrame":{"arguments":[],"file":"node_modules/next/src/next-devtools/shared/console-error.ts","line1":16,"column1":35,"ignored":true,"methodName":"createConsoleError"},"originalCodeFrame":null}},{"status":"fulfilled","value":{"originalStackFrame":{"arguments":[],"file":"node_modules/next/src/next-devtools/userspace/app/errors/use-error-handler.ts","line1":35,"column1":31,"ignored":true,"methodName":"handleConsoleError"},"originalCodeFrame":null}},{"status":"fulfilled","value":{"originalStackFrame":{"arguments":[],"file":"node_modules/next/src/next-devtools/userspace/app/errors/intercept-console-error.ts","line1":33,"column1":27,"ignored":true,"methodName":"console.error"},"originalCodeFrame":null}},{"status":"fulfilled","value":{"originalStackFrame":{"arguments":[],"file":"<anonymous>","line1":86,"column1":44,"ignored":false,"methodName":"console.error"},"originalCodeFrame":null}},{"status":"fulfilled","value":{"originalStackFrame":{"arguments":[],"file":"node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js","line1":4706,"column1":19,"ignored":true,"methodName":"<unknown>"},"originalCodeFrame":null}},{"status":"fulfilled","value":{"originalStackFrame":{"arguments":[],"file":"node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js","line1":871,"column1":30,"ignored":true,"methodName":"runWithFiberInDEV"},"originalCodeFrame":null}},{"status":"fulfilled","value":{"originalStackFrame":{"arguments":[],"file":"node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js","line1":4705,"column1":9,"ignored":true,"meth... [truncated]
+2026-02-06T12:50:14.330Z [console][error] Image with src "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.330Z [console][error] Image with src "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.330Z [console][error] Image with src "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.330Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:50:14.243Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main data-orchids-id="src\app\pa..." data-orchids-name="main">
+                              ...
+                                <nav data-orchids-id="src\compon..." data-orchids-name="motion.nav" ...>
+                                  <div data-orchids-id="src\compon..." data-orchids-name="div" className="max-w-7xl ...">
+                                  ...
+2026-02-06T12:58:47.797Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:58:48.302Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main data-orchids-id="src\app\pa..." data-orchids-name="main">
+                              <Navbar>
+                              <HeroSection data-orchids-id="src\app\pa..." data-orchids-name="HeroSection">
+                                <section
+                                  data-orchids-id="src\components\HeroSection.tsx:20:4@ref"
+                                  data-orchids-name="section"
+                                  id="home"
+                                  ref={{current:null}}
+                                  className="relative min-h-screen flex items-center overflow-hidden pt-20"
+                                  style={{background:"radial-gra..."}}
+-                                 data-orchid-ref="ref-470l1fmbcx"
+                                >
+                                  <div
+                                    data-orchids-id="src\components\HeroSection.tsx:30:6"
+                                    data-orchids-name="div"
+                                    className="absolute inset-0 overflow-hidden pointer-events-none"
+-                                   data-orchid-ref="ref-bczn6ajl92"
+                                  >
+                                    <div
+                                      data-orchids-id="src\components\HeroSection.tsx:32:8"
+                                      data-orchids-name="div"
+                                      className="absolute -top-32 -right-32 w-[700px] h-[700px] bg-gradient-to-bl from..."
+-                                     data-orchid-ref="ref-152dbhomzy"
+                                    >
+                                    <div
+                                      data-orchids-id="src\components\HeroSection.tsx:34:8"
+                                      data-orchids-name="div"
+                                      className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-gradient-to-tr fr..."
+-                                     data-orchid-ref="ref-ws3ux2uhw7"
+                                    >
+                                    <motion.div data-orchids-id="src\compon..." data-orchids-name="motion.div" ...>
+                                      <div
+                                        data-orchids-id="src\components\HeroSection.tsx:36:8"
+                                        data-orchids-name="motion.div"
+ ... [truncated]
+2026-02-06T12:58:48.310Z [console][error] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2026-02-06T12:58:48.375Z [console][error] Image with src "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:58:48.375Z [console][error] Image with src "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:58:48.375Z [console][error] Image with src "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:58:48.375Z [console][error] Image with src "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:58:48.375Z [console][error] Image with src "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:58:48.375Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T12:58:48.302Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main data-orchids-id="src\app\pa..." data-orchids-name="main">
+                              <Navbar>
+                              <HeroSection data-orchids-id="src\app\pa..." data-orchids-name="HeroSection">
+                                <section
+                                  data-orchids-id="src\components\HeroSection.tsx:20:4@ref"
+               ...
+2026-02-06T13:08:49.609Z [console][error] Image with src "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T13:09:59.814Z [console][error] Image with src "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+2026-02-06T13:22:11.170Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main
+                              data-orchids-id="src\app\page.tsx:10:4"
+                              data-orchids-name="main"
+-                             data-orchid-ref="ref-xwsftq5y8j"
+                            >
+                              <Navbar data-orchids-id="src\app\pa..." data-orchids-name="Navbar">
+                                <motion.nav data-orchids-id="src\compon..." data-orchids-name="motion.nav" ...>
+                                  <nav
+                                    data-orchids-id="src\components\Navbar.tsx:28:4"
+                                    data-orchids-name="motion.nav"
+                                    className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-cream/60..."
+                                    style={{transform:"translateY..."}}
+                                    ref={function useMotionRef.useCallback}
+-                                   data-orchid-ref="ref-jgczrntjso"
+                                  >
+                                    <div
+                                      data-orchids-id="src\components\Navbar.tsx:38:6"
+                                      data-orchids-name="div"
+                                      className="max-w-7xl mx-auto px-6 lg:px-8"
+-                                     data-orchid-ref="ref-9jfkx5p7x6"
+                                    >
+                                      <div
+                                        data-orchids-id="src\components\Navbar.tsx:39:8"
+                                        data-orchids-name="div"
+                                        className="flex items-center justify-between h-[72px]"
+-                                       data-orchid-ref="ref-edymybeyu5"
+                                      >
+                                        <LinkComponent data-orchids-id="src\compon..." data-orchids-name="Link" href="/" ...>
+                                          <a
+                                            data-orchids-id="src\components\Navbar.tsx:41:10"
+                                            data-orchids-name="Link"
+                                            className="flex items-center gap-2 group shrink-0"
+                                            ref={function}
+                                            onClick={function onClick}
+               ... [truncated]
+2026-02-06T13:22:11.180Z [console][error] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2026-02-06T13:22:11.169Z [console][error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                        <SegmentViewNode type="page" pagePath="/orchids-p...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main
+                              data-orchids-id="src\app\page.tsx:10:4"
+                              data-orchids-name="main"
+-                             data-orchid-ref="ref-xwsftq5y8j"
+                            >
+                              <Navbar data-orchids-id="src\app\pa..." data-orchids-name="Navbar">
+                                <moti...
