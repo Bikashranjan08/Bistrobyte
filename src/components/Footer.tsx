@@ -111,7 +111,7 @@ export default function Footer() {
               />
             </div>
             <p
-              className="text-[#c9a96e] text-2xl font-bold italic -mt-38 relative z-10 drop-shadow-md"
+              className="text-[#c9a96e] text-2xl font-bold italic -mt-37 relative z-10 drop-shadow-md"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Thank You!
