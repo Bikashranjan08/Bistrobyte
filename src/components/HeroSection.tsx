@@ -240,6 +240,25 @@ export default function HeroSection() {
                 </div>
               </motion.div>
 
+              {/* Floating Icons for Mobile Richness */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.8, type: "spring" }}
+                className="absolute -top-4 -left-4 z-20 bg-white p-2 rounded-full shadow-lg shadow-emerald-green/10 flex items-center justify-center"
+              >
+                <span className="text-xl">🌿</span>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 2.0, type: "spring" }}
+                className="absolute bottom-10 -right-2 z-20 bg-white p-2 rounded-full shadow-lg shadow-orange-500/10 flex items-center justify-center"
+              >
+                <span className="text-xl">🔥</span>
+              </motion.div>
+
             </div>
           </motion.div>
         </div>

@@ -175,7 +175,7 @@ function MenuPageContent() {
                         key={item.name}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, margin: "-50px" }}
+                        viewport={{ once: false, margin: "-20px" }}
                         transition={{ delay: Math.min(idx * 0.05, 0.4) }}
                         className="group"
                       >
