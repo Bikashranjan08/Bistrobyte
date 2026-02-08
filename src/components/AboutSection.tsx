@@ -155,7 +155,7 @@ export default function AboutSection() {
               <div className="relative w-full max-w-2xl">
                 {/* Circular frame behind illustration */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-96 h-96 sm:w-[28rem] sm:h-[28rem] rounded-full bg-gradient-to-br from-emerald-green/10 to-royal-amethyst/5 border border-emerald-green/10" />
+                  <div className="w-[85vw] h-[85vw] max-w-[24rem] max-h-[24rem] sm:w-[28rem] sm:h-[28rem] rounded-full bg-gradient-to-br from-emerald-green/10 to-royal-amethyst/5 border border-emerald-green/10" />
                 </div>
                 {/* Kitchen SVG illustration */}
                 <div className="relative z-10 flex items-center justify-center py-8">
