@@ -95,14 +95,14 @@ function MandalaCorner({ className }: { className?: string }) {
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative overflow-hidden">
+    <section id="about" className="relative overflow-hidden bg-mint-whisper">
       {/* ═══ Hero: Pure Veg. Pure Love. ═══ */}
-      <div className="relative bg-cream py-24 sm:py-32 overflow-hidden">
+      <div className="relative py-24 sm:py-32 overflow-hidden">
         {/* Mandala corners */}
-        <MandalaCorner className="absolute top-0 left-0 w-48 sm:w-64 h-48 sm:h-64 text-saffron-dark" />
-        <MandalaCorner className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 text-saffron-dark -scale-x-100" />
-        <MandalaCorner className="absolute bottom-0 left-0 w-36 sm:w-48 h-36 sm:h-48 text-emerald -scale-y-100" />
-        <MandalaCorner className="absolute bottom-0 right-0 w-36 sm:w-48 h-36 sm:h-48 text-emerald scale-x-[-1] scale-y-[-1]" />
+        <MandalaCorner className="absolute top-0 left-0 w-48 sm:w-64 h-48 sm:h-64 text-royal-amethyst" />
+        <MandalaCorner className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 text-royal-amethyst -scale-x-100" />
+        <MandalaCorner className="absolute bottom-0 left-0 w-36 sm:w-48 h-36 sm:h-48 text-emerald-green -scale-y-100" />
+        <MandalaCorner className="absolute bottom-0 right-0 w-36 sm:w-48 h-36 sm:h-48 text-emerald-green scale-x-[-1] scale-y-[-1]" />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -110,24 +110,24 @@ export default function AboutSection() {
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ type: "spring", stiffness: 80, damping: 20 }}
             >
               <span
-                className="text-sm font-semibold text-saffron-dark uppercase tracking-[0.2em] mb-4 block"
+                className="text-sm font-semibold text-royal-amethyst uppercase tracking-[0.2em] mb-4 block"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 Our Story
               </span>
               <h2
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal mb-6 leading-tight"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-dark-evergreen mb-6 leading-tight"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Pure Veg.{" "}
-                <span className="text-emerald">Pure Love.</span>
+                <span className="text-emerald-green">Pure Love.</span>
               </h2>
               <p
-                className="text-warm-gray text-lg leading-relaxed mb-6"
+                className="text-emerald-dark/70 text-lg leading-relaxed mb-6"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 From our modern cloud kitchen to your doorstep, we bring you the
@@ -135,7 +135,7 @@ export default function AboutSection() {
                 and hygiene.
               </p>
               <p
-                className="text-warm-gray text-base leading-relaxed"
+                className="text-emerald-dark/70 text-base leading-relaxed"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 Born from a deep passion for authentic vegetarian cuisine, Nilkanth
@@ -148,23 +148,23 @@ export default function AboutSection() {
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ type: "spring", stiffness: 80, damping: 20, delay: 0.15 }}
               className="flex justify-center"
             >
               <div className="relative w-full max-w-2xl">
                 {/* Circular frame behind illustration */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-96 h-96 sm:w-[28rem] sm:h-[28rem] rounded-full bg-gradient-to-br from-cream-dark/80 to-cream border border-light-border/30" />
+                  <div className="w-96 h-96 sm:w-[28rem] sm:h-[28rem] rounded-full bg-gradient-to-br from-emerald-green/10 to-royal-amethyst/5 border border-emerald-green/10" />
                 </div>
                 {/* Kitchen SVG illustration */}
                 <div className="relative z-10 flex items-center justify-center py-8">
                   <NextImage
-                    src="/about-us-illustration-v2.png"
-                    alt="Cloud Kitchen Illustration"
+                    src="/about-us-chef-final.png"
+                    alt="Our Cloud Kitchen Team"
                     width={1000}
                     height={750}
-                    className="w-full max-w-xl drop-shadow-lg"
+                    className="w-full max-w-xl drop-shadow-2xl rounded-2xl"
                     priority
                   />
                 </div>
@@ -175,7 +175,7 @@ export default function AboutSection() {
       </div>
 
       {/* ═══ Stats Bar ═══ */}
-      <div className="bg-emerald py-10">
+      <div className="bg-dark-evergreen py-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
@@ -183,12 +183,12 @@ export default function AboutSection() {
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, margin: "-50px" }}
                 transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
                 className="text-center"
               >
                 <p
-                  className="text-3xl sm:text-4xl font-bold text-saffron mb-1"
+                  className="text-3xl sm:text-4xl font-bold text-emerald-green mb-1"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
                   {stat.number}
@@ -210,7 +210,7 @@ export default function AboutSection() {
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #0F5132 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, #10B981 1px, transparent 0)`,
             backgroundSize: "32px 32px",
           }}
         />
@@ -219,24 +219,24 @@ export default function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, margin: "-50px" }}
             transition={{ type: "spring", stiffness: 80, damping: 20 }}
             className="text-center mb-16"
           >
             <span
-              className="text-sm font-semibold text-saffron-dark uppercase tracking-[0.2em] mb-3 block"
+              className="text-sm font-semibold text-royal-amethyst uppercase tracking-[0.2em] mb-3 block"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Why Choose Us
             </span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-4"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-evergreen mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              The <span className="text-emerald">Nilkanth</span> Promise
+              The <span className="text-emerald-green">Nilkanth</span> Promise
             </h2>
             <p
-              className="text-warm-gray text-lg max-w-2xl mx-auto"
+              className="text-emerald-dark/70 text-lg max-w-2xl mx-auto"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Nourish your body, elevate your soul. Here is what sets us apart.
@@ -249,7 +249,7 @@ export default function AboutSection() {
                 key={value.title}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, margin: "-50px" }}
                 transition={{
                   delay: i * 0.1,
                   type: "spring",
@@ -260,22 +260,22 @@ export default function AboutSection() {
                 <motion.div
                   whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="group text-center p-8 rounded-3xl bg-cream/60 border border-light-border/50 hover:bg-white hover:shadow-[0_8px_40px_rgba(15,81,50,0.08)] transition-all duration-500"
+                  className="group text-center p-8 rounded-3xl bg-mint-whisper border border-emerald-green/10 hover:bg-white hover:shadow-[0_8px_40px_rgba(16,185,129,0.12)] transition-all duration-500"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald/10 to-emerald/5 flex items-center justify-center mx-auto mb-6 group-hover:from-emerald group-hover:to-emerald-light transition-all duration-500">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-green/10 to-emerald-green/5 flex items-center justify-center mx-auto mb-6 group-hover:from-emerald-green group-hover:to-emerald-green/80 transition-all duration-500">
                     <value.icon
                       size={28}
-                      className="text-emerald group-hover:text-white transition-colors duration-500"
+                      className="text-emerald-green group-hover:text-white transition-colors duration-500"
                     />
                   </div>
                   <h3
-                    className="text-lg font-bold text-charcoal mb-3"
+                    className="text-lg font-bold text-dark-evergreen mb-3"
                     style={{ fontFamily: "var(--font-playfair)" }}
                   >
                     {value.title}
                   </h3>
                   <p
-                    className="text-sm text-warm-gray leading-relaxed"
+                    className="text-sm text-emerald-dark/70 leading-relaxed"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
                     {value.description}
@@ -288,8 +288,8 @@ export default function AboutSection() {
       </div>
 
       {/* ═══ Our Journey / Story Section ═══ */}
-      <div className="bg-cream py-24 sm:py-28 relative overflow-hidden">
-        <MandalaCorner className="absolute bottom-0 right-0 w-48 h-48 text-saffron-dark scale-x-[-1] scale-y-[-1]" />
+      <div className="bg-mint-whisper py-24 sm:py-28 relative overflow-hidden">
+        <MandalaCorner className="absolute bottom-0 right-0 w-48 h-48 text-royal-amethyst scale-x-[-1] scale-y-[-1]" />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -297,23 +297,23 @@ export default function AboutSection() {
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, margin: "-50px" }}
               transition={{ type: "spring", stiffness: 80, damping: 20 }}
               className="grid grid-cols-2 gap-6"
             >
               {[
-                { icon: UtensilsCrossed, label: "North Indian", desc: "Rich curries & gravies", color: "from-emerald to-emerald-light" },
-                { icon: Flame, label: "Tandoori", desc: "Clay oven specials", color: "from-saffron-dark to-saffron" },
-                { icon: ChefHat, label: "Chinese", desc: "Indo-Chinese fusion", color: "from-emerald-light to-emerald" },
-                { icon: Truck, label: "Cloud Kitchen", desc: "Fast delivery to you", color: "from-saffron to-saffron-light" },
+                { icon: UtensilsCrossed, label: "North Indian", desc: "Rich curries & gravies", color: "from-emerald-green to-emerald-dark" },
+                { icon: Flame, label: "Tandoori", desc: "Clay oven specials", color: "from-royal-amethyst to-royal-amethyst-light" },
+                { icon: ChefHat, label: "Chinese", desc: "Indo-Chinese fusion", color: "from-emerald-green to-emerald-green" },
+                { icon: Truck, label: "Cloud Kitchen", desc: "Fast delivery to you", color: "from-royal-amethyst/80 to-royal-amethyst-light" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, margin: "-50px" }}
                   transition={{ delay: i * 0.1 }}
-                  className={`relative rounded-2xl p-6 bg-gradient-to-br ${item.color} text-white overflow-hidden`}
+                  className={`relative rounded-2xl p-6 bg-gradient-to-br ${item.color} text-white overflow-hidden shadow-lg`}
                 >
                   <item.icon size={32} className="mb-3 opacity-90" />
                   <h4
@@ -336,32 +336,32 @@ export default function AboutSection() {
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, margin: "-50px" }}
               transition={{ type: "spring", stiffness: 80, damping: 20, delay: 0.1 }}
             >
               <span
-                className="text-sm font-semibold text-saffron-dark uppercase tracking-[0.2em] mb-4 block"
+                className="text-sm font-semibold text-royal-amethyst uppercase tracking-[0.2em] mb-4 block"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 What We Serve
               </span>
               <h2
-                className="text-3xl sm:text-4xl font-bold text-charcoal mb-6"
+                className="text-3xl sm:text-4xl font-bold text-dark-evergreen mb-6"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 A Menu That Speaks{" "}
-                <span className="text-emerald">Flavors</span>
+                <span className="text-emerald-green">Flavors</span>
               </h2>
               <div className="space-y-4" style={{ fontFamily: "var(--font-inter)" }}>
-                <p className="text-warm-gray leading-relaxed">
-                  Our extensive menu features over <strong className="text-charcoal">140+ dishes</strong> spanning
+                <p className="text-emerald-dark/80 leading-relaxed">
+                  Our extensive menu features over <strong className="text-dark-evergreen">140+ dishes</strong> spanning
                   comforting Soups, crispy Starters, aromatic Biryanis, rich Main Courses,
                   fresh Tandoori breads, and indulgent Desserts.
                 </p>
-                <p className="text-warm-gray leading-relaxed">
-                  From the classic <strong className="text-charcoal">Paneer Butter Masala</strong> and{" "}
-                  <strong className="text-charcoal">Mushroom Tikka</strong> to our signature{" "}
-                  <strong className="text-charcoal">Nilkanth Spl Veg Soup</strong> — each dish
+                <p className="text-emerald-dark/80 leading-relaxed">
+                  From the classic <strong className="text-dark-evergreen">Paneer Butter Masala</strong> and{" "}
+                  <strong className="text-dark-evergreen">Mushroom Tikka</strong> to our signature{" "}
+                  <strong className="text-dark-evergreen">Nilkanth Spl Veg Soup</strong> — each dish
                   is a celebration of vegetarian excellence.
                 </p>
               </div>
@@ -371,9 +371,9 @@ export default function AboutSection() {
                 {["Soups & Salads", "Noodles & Fried Rice", "Starters & Tandoori", "Biryanis & Curries", "Dal & Breads", "Desserts & Drinks"].map(
                   (item) => (
                     <div key={item} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-saffron flex-shrink-0" />
+                      <div className="w-2 h-2 rounded-full bg-emerald-green flex-shrink-0" />
                       <span
-                        className="text-sm text-charcoal/80"
+                        className="text-sm text-dark-evergreen/80"
                         style={{ fontFamily: "var(--font-inter)" }}
                       >
                         {item}
@@ -393,9 +393,9 @@ export default function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, margin: "-50px" }}
             transition={{ type: "spring", stiffness: 80, damping: 20 }}
-            className="bg-gradient-to-r from-emerald to-emerald-light rounded-3xl p-10 sm:p-14 text-white shadow-xl shadow-emerald/20 relative overflow-hidden"
+            className="bg-gradient-to-r from-emerald-green to-emerald-dark rounded-3xl p-10 sm:p-14 text-white shadow-xl shadow-emerald-green/20 relative overflow-hidden"
           >
             {/* Decorative circles */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -431,7 +431,7 @@ export default function AboutSection() {
                       key={item.text}
                       className="flex items-center gap-2 bg-white/10 rounded-xl px-4 py-3"
                     >
-                      <item.icon size={18} className="text-saffron flex-shrink-0" />
+                      <item.icon size={18} className="text-emerald-300 flex-shrink-0" />
                       <span
                         className="text-sm font-medium text-white/90"
                         style={{ fontFamily: "var(--font-inter)" }}

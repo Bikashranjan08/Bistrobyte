@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import { VisualEditsMessenger } from "orchids-visual-edits";
+
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -16,10 +16,34 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Nilkanth Restaurant | Pure Veg. Pure Love.",
-  description:
-    "Experience authentic vegetarian North Indian & Chinese cuisine. Premium cloud kitchen delivering warmth to your doorstep.",
+  title: "Nilkanth - Authentic Cloud Kitchen | Mint & Amethyst Edition",
+  description: "Experience authentic vegetarian cuisine with Nilkanth. delicious soups, starters, curries, and more delivered with warmth. Order online now!",
+  keywords: ["cloud kitchen", "vegetarian food", "indian cuisine", "food delivery", "nilkanth", "authentic veg", "paneer", "soup", "biryani"],
+  openGraph: {
+    title: "Nilkanth - Authentic Cloud Kitchen",
+    description: "Experience authentic vegetarian cuisine with Nilkanth. delicious soups, starters, curries, and more delivered with warmth.",
+    url: "https://nilkanth-kitchen.com", // Placeholder URL
+    siteName: "Nilkanth Cloud Kitchen",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nilkanth - Authentic Cloud Kitchen",
+    description: "Authentic vegetarian cuisine delivered with warmth.",
+  },
 };
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#ebfdf5", // mint-whisper
+};
+
+import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
+import Navbar from "@/components/Navbar";
 
 export default function RootLayout({
   children,
@@ -29,10 +53,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${playfair.variable} ${inter.variable} antialiased bg-cream text-charcoal`}
+        className={`${playfair.variable} ${inter.variable} antialiased bg-mint-whisper text-dark-evergreen selection:bg-emerald-green selection:text-white-light`}
       >
-        {children}
-        <VisualEditsMessenger />
+        <AuthProvider>
+          <CartProvider>
+            <Navbar />
+            {children}
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

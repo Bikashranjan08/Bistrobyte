@@ -4,56 +4,88 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-cream: #FDFBF7;
-  --color-cream-dark: #F5F0E8;
-  --color-charcoal: #1F2937;
-  --color-emerald: #0F5132;
-  --color-emerald-light: #1A7A4E;
-  --color-saffron: #F4C430;
-  --color-saffron-light: #F7D76B;
-  --color-saffron-dark: #D4A017;
-  --color-warm-white: #FFFDF8;
-  --color-warm-gray: #6B7280;
-  --color-light-border: #E8E0D4;
+  --color-mint-whisper: #F0FDF4;
+  --color-emerald-green: #10B981;
+  --color-emerald-dark: #064E3B;
+  --color-royal-amethyst: #7C3AED;
+  --color-royal-amethyst-light: #A78BFA;
+  --color-dark-evergreen: #022C22;
+  --color-white-light: #FFFFFF;
+  --color-glass-border: rgba(255, 255, 255, 0.2);
 
   --font-playfair: var(--font-playfair);
   --font-inter: var(--font-inter);
 
-  --color-background: #FDFBF7;
-  --color-foreground: #1F2937;
-  --color-primary: #0F5132;
-  --color-primary-foreground: #FDFBF7;
-  --color-secondary: #F4C430;
-  --color-secondary-foreground: #1F2937;
-  --color-muted: #F5F0E8;
-  --color-muted-foreground: #6B7280;
-  --color-accent: #F4C430;
-  --color-accent-foreground: #1F2937;
-  --color-border: #E8E0D4;
-  --color-input: #E8E0D4;
-  --color-ring: #0F5132;
-  --color-card: #FFFFFF;
-  --color-card-foreground: #1F2937;
-  --color-popover: #FFFFFF;
-  --color-popover-foreground: #1F2937;
-  --color-destructive: #EF4444;
+  --color-background: var(--color-mint-whisper);
+  --color-foreground: var(--color-dark-evergreen);
 
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  --color-primary: var(--color-emerald-green);
+  --color-primary-foreground: var(--color-white-light);
+
+  --color-secondary: var(--color-royal-amethyst);
+  --color-secondary-foreground: var(--color-white-light);
+
+  --color-accent: var(--color-royal-amethyst-light);
+  --color-accent-foreground: var(--color-dark-evergreen);
+
+  --color-muted: #E6FFFA;
+  --color-muted-foreground: #065F46;
+
+  --color-border: var(--color-emerald-green);
+  --color-input: rgba(16, 185, 129, 0.2);
+  --color-ring: var(--color-emerald-green);
+
+  --color-card: rgba(255, 255, 255, 0.7);
+  --color-card-foreground: var(--color-dark-evergreen);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: -200% 0;
+    }
+  }
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-emerald-green/20 outline-emerald-green/50;
   }
+
   body {
-    @apply bg-cream text-charcoal;
+    @apply bg-mint-whisper text-dark-evergreen;
     font-family: var(--font-inter), system-ui, sans-serif;
     line-height: 1.6;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-playfair), Georgia, serif;
     letter-spacing: -0.02em;
     line-height: 1.2;
@@ -64,15 +96,18 @@
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #F5F0E8;
+  background: var(--color-mint-whisper);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #D4A017;
+  background: var(--color-emerald-green);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #0F5132;
+  background: var(--color-emerald-dark);
 }
 
 /* Hide Next.js error overlay portal */
@@ -82,8 +117,8 @@ nextjs-portal {
 
 /* Selection color */
 ::selection {
-  background-color: #F4C430;
-  color: #1F2937;
+  background-color: var(--color-emerald-green);
+  color: var(--color-white-light);
 }
 
 /* Smooth scrolling for the whole page */
