@@ -173,7 +173,7 @@ export default function HeroSection() {
             style={{ y: heroImageY }}
             className="relative flex items-center justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[580px] aspect-square mx-auto lg:mx-0">
+            <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[580px] aspect-square mx-auto lg:mx-0">
               {/* Central Glow */}
               <div className="absolute inset-[15%] bg-gradient-to-tr from-emerald-green/20 via-white/50 to-royal-amethyst/10 rounded-full blur-[60px] animate-pulse-slow" />
 
@@ -205,9 +205,9 @@ export default function HeroSection() {
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.4, type: "spring" }}
-                className="absolute top-[20%] right-0 z-20"
+                className="absolute -top-4 -right-4 sm:top-[20%] sm:right-0 z-20 scale-90 sm:scale-100"
               >
-                <div className="bg-white/80 backdrop-blur-xl border border-white/40 p-4 rounded-2xl shadow-xl shadow-emerald-green/5 max-w-[160px]">
+                <div className="bg-white/90 backdrop-blur-xl border border-white/40 p-3 sm:p-4 rounded-2xl shadow-xl shadow-emerald-green/10 max-w-[140px] sm:max-w-[160px]">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-green animate-pulse" />
                     <span className="text-xs font-medium text-dark-evergreen">Live Kitchen</span>
@@ -227,9 +227,9 @@ export default function HeroSection() {
                 initial={{ opacity: 0, x: -40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.6, type: "spring" }}
-                className="absolute bottom-[20%] left-0 z-20"
+                className="absolute -bottom-4 -left-4 sm:bottom-[20%] sm:left-0 z-20 scale-90 sm:scale-100"
               >
-                <div className="bg-white/80 backdrop-blur-xl border border-white/40 p-4 rounded-2xl shadow-xl shadow-royal-amethyst/5 flex items-center gap-4">
+                <div className="bg-white/90 backdrop-blur-xl border border-white/40 p-3 sm:p-4 rounded-2xl shadow-xl shadow-royal-amethyst/10 flex items-center gap-3 sm:gap-4">
                   <div className="w-10 h-10 rounded-full bg-royal-amethyst/10 flex items-center justify-center text-royal-amethyst font-bold">
                     4.9
                   </div>
@@ -245,18 +245,18 @@ export default function HeroSection() {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.8, type: "spring" }}
-                className="absolute -top-4 -left-4 z-20 bg-white p-2 rounded-full shadow-lg shadow-emerald-green/10 flex items-center justify-center"
+                className="absolute -top-8 left-0 sm:-top-4 sm:-left-4 z-20 bg-white p-2 rounded-full shadow-lg shadow-emerald-green/10 flex items-center justify-center animate-bounce-slow"
               >
-                <span className="text-xl">🌿</span>
+                <span className="text-lg sm:text-xl">🌿</span>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 2.0, type: "spring" }}
-                className="absolute bottom-10 -right-2 z-20 bg-white p-2 rounded-full shadow-lg shadow-orange-500/10 flex items-center justify-center"
+                className="absolute bottom-12 right-0 sm:bottom-10 sm:-right-2 z-20 bg-white p-2 rounded-full shadow-lg shadow-orange-500/10 flex items-center justify-center animate-pulse"
               >
-                <span className="text-xl">🔥</span>
+                <span className="text-lg sm:text-xl">🔥</span>
               </motion.div>
 
             </div>
