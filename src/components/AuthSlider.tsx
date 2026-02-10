@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 
@@ -9,9 +9,9 @@ export default function AuthSlider() {
     const { user, login, logout, isAuthenticated } = useAuth();
     const [email, setEmail] = useState("");
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = (e: FormEvent) => {
         e.preventDefault();
-        if (email) login(email);
+        if (email) login("dummy_token", { name: "Test User", email: email });
     };
 
     if (isAuthenticated && user) {
@@ -49,8 +49,8 @@ export default function AuthSlider() {
                     <button
                         onClick={() => setIsLogin(true)}
                         className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${isLogin
-                                ? "bg-emerald-green text-white shadow-md"
-                                : "text-emerald-dark/60 hover:text-emerald-dark"
+                            ? "bg-emerald-green text-white shadow-md"
+                            : "text-emerald-dark/60 hover:text-emerald-dark"
                             }`}
                         style={{ fontFamily: "var(--font-inter)" }}
                     >
@@ -59,8 +59,8 @@ export default function AuthSlider() {
                     <button
                         onClick={() => setIsLogin(false)}
                         className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${!isLogin
-                                ? "bg-royal-amethyst text-white shadow-md"
-                                : "text-emerald-dark/60 hover:text-emerald-dark"
+                            ? "bg-royal-amethyst text-white shadow-md"
+                            : "text-emerald-dark/60 hover:text-emerald-dark"
                             }`}
                         style={{ fontFamily: "var(--font-inter)" }}
                     >

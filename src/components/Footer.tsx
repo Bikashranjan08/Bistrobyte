@@ -123,12 +123,21 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10 bg-[#022C22] mt-6">
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p
-            className="text-white/40 text-xs"
-            style={{ fontFamily: "var(--font-inter)" }}
-          >
-            &copy; {new Date().getFullYear()} Nilkanth Cloud Kitchen. All rights reserved.
-          </p>
+          <div className="flex items-center gap-3">
+            <p
+              className="text-white/40 text-xs"
+              style={{ fontFamily: "var(--font-inter)" }}
+            >
+              &copy; {new Date().getFullYear()} Nilkanth Cloud Kitchen. All rights reserved.
+            </p>
+            <Link
+              href="/admin/login"
+              className="text-emerald-400/50 hover:text-emerald-400 text-xs transition-colors duration-300 font-medium"
+              style={{ fontFamily: "var(--font-inter)" }}
+            >
+              Admin Access
+            </Link>
+          </div>
           <motion.button
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}

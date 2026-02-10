@@ -1,5 +1,19 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 @import "tw-animate-css";
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 @custom-variant dark (&:is(.dark *));
 

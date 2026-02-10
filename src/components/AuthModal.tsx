@@ -2,268 +2,377 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { X, Mail, KeyRound, User, Phone } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
-import { X } from "lucide-react";
+import { toast } from "sonner";
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function AuthModal() {
-    const { isModalOpen, closeModal, login } = useAuth();
+    const { isModalOpen, closeModal, login, signup, sendOtp, verifyOtp } = useAuth();
     const [isLogin, setIsLogin] = useState(true);
+    const [authMethod, setAuthMethod] = useState<'email' | 'phone'>('email');
+    const [isForgotPassword, setIsForgotPassword] = useState(false); // New state for Forgot Password
+
+    // Email Auth State
     const [email, setEmail] = useState("");
-    const [loginMethod, setLoginMethod] = useState<'email' | 'phone'>('email');
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+
+    // Phone Auth State
+    const [phone, setPhone] = useState("");
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
 
-    const handleLogin = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (email) login(email);
+    const [loading, setLoading] = useState(false);
+
+    const resetForm = () => {
+        setEmail("");
+        setPassword("");
+        setName("");
+        setPhone("");
+        setOtp("");
+        setOtpSent(false);
+        setLoading(false);
+        setIsForgotPassword(false);
     };
 
-    if (!isModalOpen) return null;
+    const handleEmailAuth = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const url = isLogin ? "/api/auth/login" : "/api/auth/signup";
+            const body = isLogin ? { email, password } : { name, email, password, phone };
+
+            const res = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                if (isLogin) login(data.token, data.user);
+                else signup(data.token, data.user);
+                toast.success(isLogin ? "Logged in successfully!" : "Account created successfully!");
+                resetForm();
+                closeModal(); // Close modal on success
+            } else {
+                toast.error(data.message || "Authentication failed");
+            }
+        } catch (error) {
+            toast.error("Something went wrong");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleForgotPassword = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const res = await fetch('/api/auth/forgot-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                toast.success(data.message || "Reset link sent!");
+                setIsForgotPassword(false); // Optionally close or show success state
+                closeModal();
+            } else {
+                toast.error(data.message || "Failed to send reset link");
+            }
+        } catch (error) {
+            toast.error("Something went wrong");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSendOtp = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (phone.length < 10) return toast.error("Invalid phone number");
+        setLoading(true);
+        const res = await sendOtp(phone);
+        setLoading(false);
+        if (res.success) {
+            setOtpSent(true);
+            toast.success("OTP Sent!");
+        } else {
+            toast.error(res.message);
+        }
+    };
+
+    const handleVerifyOtp = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        const res = await verifyOtp(phone, otp);
+        setLoading(false);
+        if (res.success) {
+            toast.success("Logged in verified!");
+            // Modal closes automatically via context update in verifyOtp, but we can double check
+            closeModal();
+            resetForm();
+        } else {
+            toast.error(res.message);
+        }
+    };
 
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                {/* Backdrop */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onClick={closeModal}
-                    className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-                />
-
-                {/* Modal Content */}
-                <motion.div
-                    initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                    animate={{ scale: 1, opacity: 1, y: 0 }}
-                    exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                    className="relative w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-2xl z-10"
-                >
-                    {/* Close Button */}
-                    <button
+            {isModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-0"
                         onClick={closeModal}
-                        className="absolute top-4 right-4 p-2 rounded-full bg-black/5 hover:bg-black/10 text-dark-evergreen/60 hover:text-dark-evergreen transition-colors z-20"
+                    />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                        className="bg-white rounded-none sm:rounded-3xl w-full h-full sm:h-auto sm:max-w-md overflow-y-auto shadow-2xl relative z-10"
                     >
-                        <X size={20} />
-                    </button>
+                        <button
+                            onClick={closeModal}
+                            className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors z-10 touch-manipulation"
+                        >
+                            <X size={20} className="text-gray-600" />
+                        </button>
 
-                    {/* Background Image/Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-mint-whisper to-emerald-green/10 z-0">
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center opacity-10" />
-                    </div>
+                        <div className="p-8">
+                            <div className="text-center mb-8">
+                                <h2 className="text-3xl font-bold text-dark-evergreen mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
+                                    {isForgotPassword ? "Reset Password" : (authMethod === 'phone' ? 'Phone Login' : (isLogin ? "Welcome Back" : "Create Account"))}
+                                </h2>
+                                <p className="text-emerald-dark/60">
+                                    {isForgotPassword ? "Enter your email to receive a reset link" : (authMethod === 'phone' ? 'Enter your mobile number to continue' : (isLogin ? "Login to access your orders" : "Sign up for exclusive offers"))}
+                                </p>
+                            </div>
 
-                    <div className="relative z-10 p-8 pt-12">
-                        {/* Toggle Switch */}
-                        <div className="flex bg-emerald-green/5 rounded-full p-1 mb-8 shadow-inner max-w-[280px] mx-auto">
-                            <button
-                                onClick={() => setIsLogin(true)}
-                                className={`flex-1 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${isLogin
-                                    ? "bg-emerald-green text-white shadow-md"
-                                    : "text-emerald-dark/60 hover:text-emerald-dark"
-                                    }`}
-                                style={{ fontFamily: "var(--font-inter)" }}
-                            >
-                                Login
-                            </button>
-                            <button
-                                onClick={() => setIsLogin(false)}
-                                className={`flex-1 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${!isLogin
-                                    ? "bg-royal-amethyst text-white shadow-md"
-                                    : "text-emerald-dark/60 hover:text-emerald-dark"
-                                    }`}
-                                style={{ fontFamily: "var(--font-inter)" }}
-                            >
-                                Sign Up
-                            </button>
-                        </div>
-
-                        {/* Forms */}
-                        <div className="min-h-[300px]">
-                            <AnimatePresence mode="wait">
-                                {isLogin ? (
-                                    <motion.form
-                                        key="login"
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: 20 }}
-                                        transition={{ duration: 0.2 }}
-                                        onSubmit={handleLogin}
-                                        className="flex flex-col gap-5"
+                            {/* Auth Method Toggle - Hide if Forgot Password */}
+                            {!isForgotPassword && (
+                                <div className="flex gap-2 p-1 bg-gray-100 rounded-xl mb-6">
+                                    <button
+                                        onClick={() => { setAuthMethod('email'); setIsLogin(true); resetForm(); }}
+                                        className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${authMethod === 'email' ? 'bg-white shadow text-dark-evergreen' : 'text-gray-500 hover:text-gray-700'}`}
                                     >
-                                        {/* Method Selection Tabs */}
-                                        <div className="flex p-1 bg-emerald-green/5 rounded-xl mb-2">
-                                            <button
-                                                type="button"
-                                                onClick={() => { setLoginMethod('email'); setOtpSent(false); }}
-                                                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all ${loginMethod === 'email' ? 'bg-white shadow-sm text-emerald-dark' : 'text-emerald-dark/50'}`}
-                                            >
-                                                Email
-                                            </button>
-                                            <button
-                                                type="button"
-                                                onClick={() => { setLoginMethod('phone'); setOtpSent(false); }}
-                                                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all ${loginMethod === 'phone' ? 'bg-white shadow-sm text-emerald-dark' : 'text-emerald-dark/50'}`}
-                                            >
-                                                Phone
-                                            </button>
-                                        </div>
-
-                                        <div className="space-y-4">
-                                            {/* Email Input */}
-                                            {loginMethod === 'email' && (
-                                                <div>
-                                                    <label className="block text-xs font-bold text-emerald-dark/60 uppercase tracking-wider mb-1.5 ml-1">
-                                                        Email Address
-                                                    </label>
-                                                    <input
-                                                        type="email"
-                                                        required
-                                                        value={email}
-                                                        onChange={(e) => setEmail(e.target.value)}
-                                                        className="w-full px-5 py-3.5 bg-white/60 backdrop-blur-sm border border-emerald-green/10 rounded-2xl focus:ring-2 focus:ring-emerald-green/20 outline-none transition-all placeholder:text-emerald-dark/30 font-medium text-dark-evergreen"
-                                                        placeholder="hello@example.com"
-                                                    />
-                                                </div>
-                                            )}
-
-                                            {/* Phone Input */}
-                                            {loginMethod === 'phone' && (
-                                                <div>
-                                                    <label className="block text-xs font-bold text-emerald-dark/60 uppercase tracking-wider mb-1.5 ml-1">
-                                                        Mobile Number
-                                                    </label>
-                                                    <div className="relative">
-                                                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-dark-evergreen/60 font-medium">+91</span>
-                                                        <input
-                                                            type="tel"
-                                                            required
-                                                            value={email} // Using email state for phone as well to minimize refactoring
-                                                            onChange={(e) => {
-                                                                const val = e.target.value.replace(/\D/g, '');
-                                                                if (val.length <= 10) setEmail(val);
-                                                            }}
-                                                            className="w-full pl-12 pr-5 py-3.5 bg-white/60 backdrop-blur-sm border border-emerald-green/10 rounded-2xl focus:ring-2 focus:ring-emerald-green/20 outline-none transition-all placeholder:text-emerald-dark/30 font-medium text-dark-evergreen tracking-widest"
-                                                            placeholder="98765 43210"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {/* OTP Input */}
-                                            {loginMethod === 'phone' && otpSent && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, height: 0 }}
-                                                    animate={{ opacity: 1, height: 'auto' }}
-                                                    className="overflow-hidden"
-                                                >
-                                                    <label className="block text-xs font-bold text-emerald-dark/60 uppercase tracking-wider mb-1.5 ml-1">
-                                                        Enter OTP
-                                                    </label>
-                                                    <div className="flex gap-2">
-                                                        {[0, 1, 2, 3].map((i) => (
-                                                            <input
-                                                                key={i}
-                                                                type="text"
-                                                                maxLength={1}
-                                                                value={otp[i] || ""}
-                                                                onChange={(e) => {
-                                                                    const val = e.target.value;
-                                                                    const newOtp = otp.split('');
-                                                                    newOtp[i] = val;
-                                                                    setOtp(newOtp.join(''));
-                                                                    if (val && i < 3) {
-                                                                        const nextInput = e.target.parentElement?.querySelectorAll('input')[i + 1] as HTMLInputElement;
-                                                                        if (nextInput) nextInput.focus();
-                                                                    }
-                                                                }}
-                                                                className="w-full py-3.5 text-center bg-white/80 border border-emerald-green/20 rounded-xl focus:ring-2 focus:ring-emerald-green/30 outline-none font-bold text-xl text-dark-evergreen"
-                                                            />
-                                                        ))}
-                                                    </div>
-                                                    <div className="flex justify-between items-center mt-2">
-                                                        <span className="text-xs text-emerald-dark/50">Didn't receive code?</span>
-                                                        <button type="button" className="text-xs font-bold text-emerald-green hover:text-emerald-dark">Resend</button>
-                                                    </div>
-                                                </motion.div>
-                                            )}
-
-                                            {/* Password Input (Only for Email) */}
-                                            {loginMethod === 'email' && (
-                                                <div>
-                                                    <label className="block text-xs font-bold text-emerald-dark/60 uppercase tracking-wider mb-1.5 ml-1">Password</label>
-                                                    <input
-                                                        type="password"
-                                                        className="w-full px-5 py-3.5 bg-white/60 backdrop-blur-sm border border-emerald-green/10 rounded-2xl focus:ring-2 focus:ring-emerald-green/20 outline-none transition-all placeholder:text-emerald-dark/30 font-medium text-dark-evergreen"
-                                                        placeholder="••••••••"
-                                                    />
-                                                    <div className="flex justify-end mt-1">
-                                                        <a href="#" className="text-xs font-bold text-emerald-green hover:text-emerald-dark transition-colors">Forgot password?</a>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <button
-                                            type="button" // Changed to button to prevent default form submission unless explicit
-                                            onClick={(e) => {
-                                                if (loginMethod === 'phone' && !otpSent) {
-                                                    // Send OTP Logic
-                                                    if (email.length < 10) return; // Simple validation
-                                                    setOtpSent(true);
-                                                } else {
-                                                    handleLogin(e);
-                                                }
-                                            }}
-                                            className="w-full py-4 bg-dark-evergreen text-white font-bold rounded-2xl shadow-lg shadow-emerald-green/20 hover:bg-emerald-green transition-all transform hover:-translate-y-1 active:scale-95 mt-2 flex items-center justify-center gap-2"
-                                        >
-                                            {loginMethod === 'phone' ? (otpSent ? "Verify & Login" : "Get OTP") : "Login to Continue"}
-                                        </button>
-                                    </motion.form>
-                                ) : (
-                                    <motion.form
-                                        key="signup"
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -20 }}
-                                        transition={{ duration: 0.2 }}
-                                        onSubmit={handleLogin}
-                                        className="flex flex-col gap-4"
+                                        Email
+                                    </button>
+                                    <button
+                                        onClick={() => { setAuthMethod('phone'); resetForm(); }}
+                                        className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${authMethod === 'phone' ? 'bg-white shadow text-dark-evergreen' : 'text-gray-500 hover:text-gray-700'}`}
                                     >
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-xs font-bold text-emerald-dark/60 uppercase tracking-wider mb-1.5 ml-1">First Name</label>
-                                                <input type="text" className="w-full px-5 py-3.5 bg-white/60 backdrop-blur-sm border border-emerald-green/10 rounded-2xl focus:ring-2 focus:ring-emerald-green/20 outline-none transition-all" />
-                                            </div>
-                                            <div>
-                                                <label className="block text-xs font-bold text-emerald-dark/60 uppercase tracking-wider mb-1.5 ml-1">Last Name</label>
-                                                <input type="text" className="w-full px-5 py-3.5 bg-white/60 backdrop-blur-sm border border-emerald-green/10 rounded-2xl focus:ring-2 focus:ring-emerald-green/20 outline-none transition-all" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs font-bold text-emerald-dark/60 uppercase tracking-wider mb-1.5 ml-1">Email</label>
+                                        Phone
+                                    </button>
+                                </div>
+                            )}
+
+                            {isForgotPassword ? (
+                                <form onSubmit={handleForgotPassword} className="space-y-4">
+                                    <div className="relative">
+                                        <Mail size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                        <input
+                                            type="email"
+                                            placeholder="Enter your email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className="w-full pl-12 pr-4 py-3 min-h-[44px] bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-green focus:ring-1 focus:ring-emerald-green transition-all text-base"
+                                            required
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={loading}
+                                        className="w-full py-3 bg-dark-evergreen text-white font-bold rounded-xl hover:bg-emerald-green transition-colors shadow-lg shadow-emerald-green/20"
+                                    >
+                                        {loading ? "Sending..." : "Send Reset Link"}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsForgotPassword(false)}
+                                        className="w-full text-sm text-gray-500 hover:text-dark-evergreen font-bold"
+                                    >
+                                        Back to Login
+                                    </button>
+                                </form>
+                            ) : authMethod === 'email' ? (
+                                <form onSubmit={handleEmailAuth} className="space-y-4">
+                                    {!isLogin && (
+                                        <div className="relative">
+                                            <User size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                                             <input
-                                                type="email"
-                                                required
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                className="w-full px-5 py-3.5 bg-white/60 backdrop-blur-sm border border-emerald-green/10 rounded-2xl focus:ring-2 focus:ring-emerald-green/20 outline-none transition-all"
+                                                type="text"
+                                                placeholder="Full Name"
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                className="w-full pl-12 pr-4 py-3 min-h-[44px] bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-green focus:ring-1 focus:ring-emerald-green transition-all text-base"
+                                                required={!isLogin}
                                             />
                                         </div>
-                                        <div>
-                                            <label className="block text-xs font-bold text-emerald-dark/60 uppercase tracking-wider mb-1.5 ml-1">Phone</label>
-                                            <input type="tel" className="w-full px-5 py-3.5 bg-white/60 backdrop-blur-sm border border-emerald-green/10 rounded-2xl focus:ring-2 focus:ring-emerald-green/20 outline-none transition-all" placeholder="+91..." />
-                                        </div>
+                                    )}
+                                    <div className="relative">
+                                        <Mail size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                        <input
+                                            type="email"
+                                            placeholder="Email Address"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className="w-full pl-12 pr-4 py-3 min-h-[44px] bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-green focus:ring-1 focus:ring-emerald-green transition-all text-base"
+                                            required
+                                        />
+                                    </div>
 
-                                        <button className="w-full py-4 bg-royal-amethyst text-white font-bold rounded-2xl shadow-lg shadow-royal-amethyst/20 hover:bg-purple-600 transition-all transform hover:-translate-y-1 active:scale-95 mt-2">
-                                            Create Account
+                                    {!isLogin && (
+                                        <div className="relative">
+                                            <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                            <input
+                                                type="tel"
+                                                placeholder="Mobile Number (Optional)"
+                                                value={phone}
+                                                onChange={(e) => setPhone(e.target.value)}
+                                                className="w-full pl-12 pr-4 py-3 min-h-[44px] bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-green focus:ring-1 focus:ring-emerald-green transition-all text-base"
+                                            />
+                                        </div>
+                                    )}
+                                    <div className="relative">
+                                        <KeyRound size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                        <input
+                                            type="password"
+                                            placeholder="Password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className="w-full pl-12 pr-4 py-3 min-h-[44px] bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-green focus:ring-1 focus:ring-emerald-green transition-all text-base"
+                                            required
+                                        />
+                                    </div>
+
+                                    {isLogin && (
+                                        <div className="flex justify-end">
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsForgotPassword(true)}
+                                                className="text-xs font-bold text-emerald-green hover:underline"
+                                            >
+                                                Forgot Password?
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    <button
+                                        type="submit"
+                                        disabled={loading}
+                                        className="w-full py-3 bg-dark-evergreen text-white font-bold rounded-xl hover:bg-emerald-green transition-colors shadow-lg shadow-emerald-green/20"
+                                    >
+                                        {loading ? "Processing..." : (isLogin ? "Login" : "Sign Up")}
+                                    </button>
+                                </form>
+                            ) : (
+                                /* PHONE AUTH FORM */
+                                <form onSubmit={otpSent ? handleVerifyOtp : handleSendOtp} className="space-y-4">
+                                    {!otpSent ? (
+                                        <div className="relative">
+                                            <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                            <input
+                                                type="tel"
+                                                placeholder="Mobile Number"
+                                                value={phone}
+                                                onChange={(e) => setPhone(e.target.value)}
+                                                className="w-full pl-12 pr-4 py-3 min-h-[44px] bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-green focus:ring-1 focus:ring-emerald-green transition-all text-base"
+                                                required
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="relative">
+                                            <KeyRound size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                            <input
+                                                type="text"
+                                                placeholder="Enter OTP"
+                                                value={otp}
+                                                onChange={(e) => setOtp(e.target.value)}
+                                                className="w-full pl-12 pr-4 py-3 min-h-[44px] bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-green focus:ring-1 focus:ring-emerald-green transition-all text-base"
+                                                required
+                                            />
+                                        </div>
+                                    )}
+
+                                    <button
+                                        type="submit"
+                                        disabled={loading}
+                                        className="w-full py-3 bg-dark-evergreen text-white font-bold rounded-xl hover:bg-emerald-green transition-colors shadow-lg shadow-emerald-green/20"
+                                    >
+                                        {loading ? "Processing..." : (otpSent ? "Verify OTP" : "Send OTP")}
+                                    </button>
+                                    {otpSent && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setOtpSent(false)}
+                                            className="w-full text-xs text-emerald-green font-bold hover:underline"
+                                        >
+                                            Change Number / Resend
                                         </button>
-                                    </motion.form>
-                                )}
-                            </AnimatePresence>
+                                    )}
+                                </form>
+                            )}
+
+
+                            {!isForgotPassword && (
+                                <div className="mt-6 flex items-center gap-4">
+                                    <div className="h-px bg-gray-200 flex-1" />
+                                    <span className="text-xs font-bold text-gray-400 uppercase">Or continue with</span>
+                                    <div className="h-px bg-gray-200 flex-1" />
+                                </div>
+                            )}
+
+                            {!isForgotPassword && (
+                                <div className="mt-6">
+                                    <GoogleLogin
+                                        onSuccess={async (credentialResponse) => {
+                                            try {
+                                                const res = await fetch('/api/auth/google', {
+                                                    method: 'POST',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    body: JSON.stringify({ token: credentialResponse.credential }),
+                                                });
+                                                const data = await res.json();
+                                                if (res.ok) {
+                                                    if (isLogin) login(data.token, data.user);
+                                                    else signup(data.token, data.user);
+                                                    toast.success('Logged in with Google!');
+                                                } else {
+                                                    toast.error('Google Auth Failed');
+                                                }
+                                            } catch (err) {
+                                                toast.error('Google Login Error');
+                                            }
+                                        }}
+                                        onError={() => {
+                                            toast.error('Login Failed');
+                                        }}
+                                        useOneTap
+                                    />
+                                </div>
+                            )}
+
+                            {!isForgotPassword && authMethod === 'email' && (
+                                <p className="text-center mt-6 text-sm text-gray-500">
+                                    {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+                                    <button
+                                        onClick={() => setIsLogin(!isLogin)}
+                                        className="text-emerald-green font-bold hover:underline"
+                                    >
+                                        {isLogin ? "Sign Up" : "Login"}
+                                    </button>
+                                </p>
+                            )}
                         </div>
-                    </div>
-                </motion.div>
-            </div>
+                    </motion.div>
+                </div>
+            )}
         </AnimatePresence>
     );
 }

@@ -163,20 +163,39 @@ export default function Navbar() {
               Order Now
             </Link>
 
+
             {/* Login/User Button */}
             {isAuthenticated ? (
               <div className="ml-2 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-green/10 flex items-center justify-center text-emerald-dark border border-emerald-green/20">
-                  <span className="font-bold text-sm">
-                    {user?.name?.charAt(0).toUpperCase()}
-                  </span>
+                <Link href="/profile" className="w-10 h-10 rounded-full bg-emerald-green/10 flex items-center justify-center text-emerald-dark border border-emerald-green/20 hover:border-emerald-green hover:scale-105 transition-all overflow-hidden cursor-pointer">
+                  {user?.avatar ? (
+                    <Image
+                      src={user.avatar}
+                      alt={user.name || "User"}
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="font-bold text-sm">
+                      {user?.name?.charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                </Link>
+                <div className="flex flex-col items-start">
+                  <Link href="/profile" className="text-xs font-bold text-emerald-dark hover:text-emerald-green transition-colors mb-0.5">
+                    My Profile
+                  </Link>
+                  <Link href="/my-orders" className="text-xs font-bold text-emerald-dark/60 hover:text-emerald-green transition-colors mb-0.5">
+                    My Orders
+                  </Link>
+                  <button
+                    onClick={logout}
+                    className="text-xs font-bold text-emerald-dark/60 hover:text-red-500 transition-colors"
+                  >
+                    Logout
+                  </button>
                 </div>
-                <button
-                  onClick={logout}
-                  className="text-xs font-bold text-emerald-dark/60 hover:text-red-500 transition-colors"
-                >
-                  Logout
-                </button>
               </div>
             ) : (
               <button
@@ -365,7 +384,7 @@ export default function Navbar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.1 }}
                       className="block px-4 py-4 text-2xl font-bold text-dark-evergreen hover:text-emerald-green hover:pl-6 transition-all duration-300 border-b border-light-border/30"
-                      style={{ fontFamily: "var(--font-playfair)" }}
+                      style={{ fontFamily: "var(--font-playfair)" } as React.CSSProperties}
                     >
                       {link.label}
                     </motion.a>
@@ -392,6 +411,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </motion.nav >
   );
 }

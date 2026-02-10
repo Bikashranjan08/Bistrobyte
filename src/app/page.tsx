@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import TopDishes from "@/components/TopDishes";
 import CategoryPreview from "@/components/CategoryPreview";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
@@ -10,6 +11,7 @@ export default function Home() {
     <main>
       <Navbar />
       <HeroSection />
+      <TopDishes />
       <CategoryPreview />
       <AboutSection />
       <ContactSection />

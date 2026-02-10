@@ -53,7 +53,7 @@ function MenuPageContent() {
 
       {/* Sub-Header (Search & Categories) */}
       <div className="sticky top-[80px] z-30 bg-white/80 backdrop-blur-xl border-b border-emerald-green/10 shadow-sm transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Title & Back (Optional, or simplifed) */}
@@ -81,7 +81,7 @@ function MenuPageContent() {
                 placeholder="Search dishes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-10 py-2.5 bg-mint-whisper rounded-xl border border-emerald-green/10 text-sm text-dark-evergreen focus:outline-none focus:ring-2 focus:ring-emerald-green/20"
+                className="w-full pl-11 pr-10 py-3 min-h-[44px] bg-mint-whisper rounded-xl border border-emerald-green/10 text-sm sm:text-sm text-dark-evergreen focus:outline-none focus:ring-2 focus:ring-emerald-green/20"
                 style={{ fontFamily: "var(--font-inter)" }}
               />
               {searchQuery && (
@@ -105,7 +105,7 @@ function MenuPageContent() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat.id
+                className={`flex-shrink-0 px-4 py-2.5 min-h-[44px] rounded-full text-sm font-medium transition-all duration-300 touch-manipulation ${activeCategory === cat.id
                   ? "bg-emerald-green text-white shadow-lg shadow-emerald-green/20"
                   : "bg-white text-dark-evergreen/70 border border-emerald-green/10 hover:border-emerald-green/30 hover:text-emerald-green"
                   }`}
@@ -169,7 +169,7 @@ function MenuPageContent() {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                     {category.items.map((item, idx) => (
                       <motion.div
                         key={item.name}
@@ -222,10 +222,10 @@ function MenuPageContent() {
                               </span>
                               <button
                                 onClick={() => addToCart(item)}
-                                className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-green text-white hover:bg-emerald-dark hover:scale-110 active:scale-95 transition-all shadow-lg shadow-emerald-green/20"
+                                className="w-10 h-10 min-w-[44px] min-h-[44px] sm:w-8 sm:h-8 sm:min-w-0 sm:min-h-0 flex items-center justify-center rounded-full bg-emerald-green text-white hover:bg-emerald-dark hover:scale-110 active:scale-95 transition-all shadow-lg shadow-emerald-green/20 touch-manipulation"
                                 aria-label={`Add ${item.name} to cart`}
                               >
-                                <span className="font-bold text-lg leading-none mb-0.5">+</span>
+                                <span className="font-bold text-xl sm:text-lg leading-none mb-0.5">+</span>
                               </button>
                             </div>
                           </div>

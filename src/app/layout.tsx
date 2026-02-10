@@ -41,6 +41,7 @@ export const viewport = {
   themeColor: "#ebfdf5", // mint-whisper
 };
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/Navbar";
@@ -51,16 +52,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
+        suppressHydrationWarning={true}
         className={`${playfair.variable} ${inter.variable} antialiased bg-mint-whisper text-dark-evergreen selection:bg-emerald-green selection:text-white-light`}
       >
-        <AuthProvider>
-          <CartProvider>
-            <Navbar />
-            {children}
-          </CartProvider>
-        </AuthProvider>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+          <AuthProvider>
+            <CartProvider>
+              <Navbar />
+              {children}
+            </CartProvider>
+          </AuthProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );
