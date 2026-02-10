@@ -295,120 +295,201 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Slide-in Drawer */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            className="md:hidden fixed inset-0 top-[80px] bg-white/98 backdrop-blur-3xl z-40 overflow-y-auto"
-          >
-            <div className="px-6 py-8 flex flex-col gap-6 h-full pb-24">
-              {/* Mobile Search */}
-              <div className="relative z-50">
-                <form onSubmit={handleSearch} className="flex items-center gap-3 bg-mint-whisper rounded-2xl px-5 py-4 border border-emerald-green/10 shadow-sm">
-                  <Search size={20} className="text-dark-evergreen/40 shrink-0" />
-                  <input
-                    type="text"
-                    placeholder="Search dishes..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-1 bg-transparent text-base text-dark-evergreen placeholder:text-dark-evergreen/40 outline-none"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  />
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => setSearchQuery("")}
-                      className="text-dark-evergreen/40"
-                    >
-                      <X size={18} />
-                    </button>
-                  )}
-                </form>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden fixed inset-0 top-[80px] bg-black/50 backdrop-blur-sm z-[100]"
+              onClick={() => setMobileOpen(false)}
+            />
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="md:hidden fixed top-[80px] right-0 bottom-0 w-[280px] bg-white shadow-2xl z-[101] overflow-y-auto"
+            >
+              <div className="px-6 py-6 flex flex-col gap-4 h-full">
+                {/* Mobile Search */}
+                <div className="relative">
+                  <form onSubmit={handleSearch} className="flex items-center gap-3 bg-mint-whisper rounded-2xl px-5 py-4 border border-emerald-green/10 shadow-sm">
+                    <Search size={20} className="text-dark-evergreen/40 shrink-0" />
+                    <input
+                      type="text"
+                      placeholder="Search dishes..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="flex-1 bg-transparent text-base text-dark-evergreen placeholder:text-dark-evergreen/40 outline-none"
+                      style={{ fontFamily: "var(--font-inter)" }}
+                    />
+                    {searchQuery && (
+                      <button
+                        type="button"
+                        onClick={() => setSearchQuery("")}
+                        className="text-dark-evergreen/40"
+                      >
+                        <X size={18} />
+                      </button>
+                    )}
+                  </form>
 
-                {/* Mobile Suggestions */}
-                <AnimatePresence>
-                  {suggestions.length > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-light-border/50 overflow-hidden z-50"
-                    >
-                      {suggestions.map((item, idx) => (
-                        <div
-                          key={`${item.name}-${idx}`}
-                          onClick={() => handleSuggestionClick(item.name)}
-                          className="px-5 py-4 hover:bg-mint-whisper cursor-pointer flex items-center justify-between group transition-colors border-b border-light-border/10 last:border-0"
+                  {/* Mobile Suggestions */}
+                  <AnimatePresence>
+                    {suggestions.length > 0 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-light-border/50 overflow-hidden z-50"
+                      >
+                        {suggestions.map((item, idx) => (
+                          <div
+                            key={`${item.name}-${idx}`}
+                            onClick={() => handleSuggestionClick(item.name)}
+                            className="px-5 py-4 hover:bg-mint-whisper cursor-pointer flex items-center justify-between group transition-colors border-b border-light-border/10 last:border-0"
+                          >
+                            <span className="text-base font-medium text-dark-evergreen group-hover:text-emerald-green" style={{ fontFamily: "var(--font-inter)" }}>
+                              {item.name}
+                            </span>
+                            <span className="text-sm text-dark-evergreen/60 font-bold">
+                              &#8377;{item.price}
+                            </span>
+                          </div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Navigation Links */}
+                <div className="flex flex-col gap-1">
+                  {navLinks.map((link, i) =>
+                    link.isRoute ? (
+                      <motion.div
+                        key={link.href}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.05 }}
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="block px-4 py-3 text-base font-semibold text-dark-evergreen hover:bg-emerald-green/5 hover:text-emerald-green rounded-lg transition-all duration-200"
+                          style={{ fontFamily: "var(--font-inter)" }}
                         >
-                          <span className="text-base font-medium text-dark-evergreen group-hover:text-emerald-green" style={{ fontFamily: "var(--font-inter)" }}>
-                            {item.name}
-                          </span>
-                          <span className="text-sm text-dark-evergreen/60 font-bold">
-                            &#8377;{item.price}
-                          </span>
-                        </div>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <div className="flex flex-col gap-2 mt-2">
-                {navLinks.map((link, i) =>
-                  link.isRoute ? (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <Link
+                          {link.label}
+                        </Link>
+                      </motion.div>
+                    ) : (
+                      <motion.a
+                        key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block px-4 py-4 text-2xl font-bold text-dark-evergreen hover:text-emerald-green hover:pl-6 transition-all duration-300 border-b border-light-border/30"
-                        style={{ fontFamily: "var(--font-playfair)" }}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.05 }}
+                        className="block px-4 py-3 text-base font-semibold text-dark-evergreen hover:bg-emerald-green/5 hover:text-emerald-green rounded-lg transition-all duration-200"
+                        style={{ fontFamily: "var(--font-inter)" } as React.CSSProperties}
                       >
                         {link.label}
-                      </Link>
-                    </motion.div>
-                  ) : (
-                    <motion.a
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      className="block px-4 py-4 text-2xl font-bold text-dark-evergreen hover:text-emerald-green hover:pl-6 transition-all duration-300 border-b border-light-border/30"
-                      style={{ fontFamily: "var(--font-playfair)" } as React.CSSProperties}
-                    >
-                      {link.label}
-                    </motion.a>
-                  )
-                )}
-              </div>
+                      </motion.a>
+                    )
+                  )}
+                </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-auto"
-              >
-                <Link
-                  href="/menu"
-                  onClick={() => setMobileOpen(false)}
-                  className="w-full block py-5 bg-dark-evergreen text-white text-center text-lg font-bold rounded-2xl shadow-xl shadow-emerald-green/20"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                {/* Login/Profile Section */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="mt-4 pt-4 border-t border-light-border/30"
                 >
-                  Order Now
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
+                  {isAuthenticated ? (
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3 px-4 py-3 bg-emerald-green/5 rounded-lg">
+                        <div className="w-12 h-12 rounded-full bg-emerald-green/10 flex items-center justify-center text-emerald-dark border-2 border-emerald-green/20 overflow-hidden shrink-0">
+                          {user?.avatar ? (
+                            <Image
+                              src={user.avatar}
+                              alt={user.name || "User"}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <span className="font-bold text-lg">
+                              {user?.name?.charAt(0).toUpperCase()}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-sm font-bold text-dark-evergreen">{user?.name}</span>
+                          <span className="text-xs text-dark-evergreen/60">{user?.email}</span>
+                        </div>
+                      </div>
+                      <Link
+                        href="/profile"
+                        onClick={() => setMobileOpen(false)}
+                        className="block px-4 py-3 text-sm font-semibold text-dark-evergreen hover:bg-emerald-green/5 hover:text-emerald-green rounded-lg transition-all"
+                      >
+                        My Profile
+                      </Link>
+                      <Link
+                        href="/my-orders"
+                        onClick={() => setMobileOpen(false)}
+                        className="block px-4 py-3 text-sm font-semibold text-dark-evergreen hover:bg-emerald-green/5 hover:text-emerald-green rounded-lg transition-all"
+                      >
+                        My Orders
+                      </Link>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setMobileOpen(false);
+                        }}
+                        className="block px-4 py-3 text-sm font-semibold text-red-500 hover:bg-red-50 rounded-lg transition-all text-left"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        openModal();
+                        setMobileOpen(false);
+                      }}
+                      className="w-full px-6 py-3 bg-gradient-to-r from-emerald-green to-emerald-dark text-white text-base font-bold rounded-xl shadow-lg shadow-emerald-green/20 hover:shadow-emerald-green/40 active:scale-95 transition-all"
+                    >
+                      Login / Sign Up
+                    </button>
+                  )}
+                </motion.div>
+
+                {/* Order Now CTA */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="mt-auto pt-4"
+                >
+                  <Link
+                    href="/menu"
+                    onClick={() => setMobileOpen(false)}
+                    className="w-full block py-4 bg-dark-evergreen text-white text-center text-base font-bold rounded-xl shadow-lg"
+                    style={{ fontFamily: "var(--font-inter)" }}
+                  >
+                    Order Now
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.nav >

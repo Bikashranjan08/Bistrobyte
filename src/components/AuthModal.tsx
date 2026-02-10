@@ -122,7 +122,7 @@ export default function AuthModal() {
     return (
         <AnimatePresence>
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4">
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 overflow-y-auto">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -131,15 +131,15 @@ export default function AuthModal() {
                         onClick={closeModal}
                     />
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                        className="bg-white rounded-none sm:rounded-3xl w-full h-full sm:h-auto sm:max-w-md overflow-y-auto shadow-2xl relative z-10"
+                        className="bg-white rounded-none sm:rounded-3xl w-full h-full sm:h-auto sm:max-w-md max-h-screen overflow-y-auto shadow-2xl relative z-10 my-auto"
                     >
                         <button
                             onClick={closeModal}
-                            className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors z-10 touch-manipulation"
+                            className="sticky top-4 right-4 ml-auto mr-4 mt-4 p-2.5 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors z-20 touch-manipulation shadow-md"
                         >
                             <X size={20} className="text-gray-600" />
                         </button>
