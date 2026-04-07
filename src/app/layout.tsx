@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-
+import { ClerkProvider } from "@clerk/nextjs";
+import { CartProvider } from "@/context/CartContext";
+import Navbar from "@/components/Navbar";
+import { Toaster } from "sonner";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -41,31 +44,25 @@ export const viewport = {
   themeColor: "#ebfdf5", // mint-whisper
 };
 
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { CartProvider } from "@/context/CartContext";
-import { AuthProvider } from "@/context/AuthContext";
-import Navbar from "@/components/Navbar";
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        suppressHydrationWarning={true}
-        className={`${playfair.variable} ${inter.variable} antialiased bg-mint-whisper text-dark-evergreen selection:bg-emerald-green selection:text-white-light`}
-      >
-        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
-          <AuthProvider>
-            <CartProvider>
-              <Navbar />
-              {children}
-            </CartProvider>
-          </AuthProvider>
-        </GoogleOAuthProvider>
-      </body>
-    </html>
+    <ClerkProvider afterSignOutUrl="/">
+      <html lang="en">
+        <body
+          suppressHydrationWarning={true}
+          className={`${playfair.variable} ${inter.variable} antialiased bg-mint-whisper text-dark-evergreen selection:bg-emerald-green selection:text-white-light`}
+        >
+          <CartProvider>
+            <Toaster position="top-center" richColors />
+            <Navbar />
+            {children}
+          </CartProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

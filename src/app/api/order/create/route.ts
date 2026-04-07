@@ -1,28 +1,22 @@
 import { NextResponse } from 'next/server';
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import { cookies } from 'next/headers';
-import dbConnect from '@/lib/db';
-import Order from '@/models/Order';
-import User from '@/models/User';
+import { auth } from '@clerk/nextjs/server';
+import { supabase } from '@/lib/supabase';
 
 export async function POST(req: Request) {
     try {
-        const cookieStore = await cookies();
-        const token = cookieStore.get('token');
+        const { userId } = await auth();
 
-        if (!token) {
+        if (!userId) {
             return NextResponse.json(
                 { message: 'Unauthorized' },
                 { status: 401 }
             );
         }
 
-        const decoded = jwt.verify(token.value, process.env.JWT_SECRET!) as JwtPayload;
-
         // Validate request body
         const { items, totalAmount, deliveryAddress, phoneNumber } = await req.json();
 
-        if (!items || items.length === 0) { // Original check for empty cart
+        if (!items || items.length === 0) { 
             return NextResponse.json(
                 { message: 'Cart is empty' },
                 { status: 400 }
@@ -40,23 +34,6 @@ export async function POST(req: Request) {
             return NextResponse.json({ message: "Incomplete address details" }, { status: 400 });
         }
 
-        await dbConnect();
-
-        // Check if User exists and update their profile if address/phone is missing
-        const user = await User.findById(decoded.userId);
-        if (user) {
-            let updated = false;
-            if (!user.phone) {
-                user.phone = phoneNumber;
-                updated = true;
-            }
-            if (!user.address || !user.address.street) { // Check if address or street is missing
-                user.address = deliveryAddress;
-                updated = true;
-            }
-            if (updated) await user.save();
-        }
-
         // Ensure all items have an itemId (use name as fallback for static menu items)
         const orderItems = items.map((item: any) => ({
             itemId: item.itemId || item.name, // Fallback to name if itemId is missing
@@ -66,17 +43,42 @@ export async function POST(req: Request) {
             image: item.image
         }));
 
-        const order = await Order.create({
-            userId: decoded.userId,
-            items: orderItems,
-            totalAmount,
-            deliveryAddress, // Added deliveryAddress
-            phoneNumber,     // Added phoneNumber
-            paymentMethod: 'COD', // Currently hardcoded to COD as per requirement
-            paymentStatus: 'Pending',
-        });
+        const { data: order, error } = await supabase
+            .from('orders')
+            .insert([
+                {
+                    user_id: userId,
+                    items: orderItems,
+                    total_amount: totalAmount,
+                    delivery_address: deliveryAddress,
+                    phone_number: phoneNumber,
+                    payment_method: 'COD',
+                    payment_status: 'Pending',
+                    order_status: 'Placed'
+                }
+            ])
+            .select()
+            .single();
 
-        return NextResponse.json({ order }, { status: 201 });
+        if (error) {
+            console.error('Supabase Error:', error);
+            throw error;
+        }
+
+        // Map supabase result structure to frontend expectation (frontend expects _id instead of id)
+        const mappedOrder = {
+            ...order,
+            _id: order.id,
+            totalAmount: order.total_amount,
+            deliveryAddress: order.delivery_address,
+            phoneNumber: order.phone_number,
+            paymentMethod: order.payment_method,
+            paymentStatus: order.payment_status,
+            orderStatus: order.order_status,
+            createdAt: order.created_at
+        };
+
+        return NextResponse.json({ order: mappedOrder }, { status: 201 });
 
     } catch (error) {
         console.error('Create order error:', error);

@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Package, Clock, CheckCircle, Truck, XCircle, ChefHat } from "lucide-react";
+import { CheckCircle, Truck, Package, Clock, XCircle, ChefHat, HelpCircle, ArrowLeft, Star } from "lucide-react";
+import Link from "next/link";
 
 interface OrderItem {
     name: string;
@@ -26,10 +27,12 @@ interface Order {
 }
 
 export default function MyOrdersPage() {
-    const { isAuthenticated, isLoading: authLoading } = useAuth();
+    const { isSignedIn: isAuthenticated, isLoaded } = useUser();
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
+
+    const authLoading = !isLoaded;
 
     useEffect(() => {
         if (!authLoading && !isAuthenticated) {
@@ -43,7 +46,9 @@ export default function MyOrdersPage() {
                 const res = await fetch("/api/order/my-orders");
                 if (res.ok) {
                     const data = await res.json();
-                    setOrders(data.orders);
+                    // Sort descending by date
+                    const sorted = data.orders.sort((a: Order, b: Order) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+                    setOrders(sorted);
                 }
             } catch (error) {
                 console.error("Failed to fetch orders", error);
@@ -54,107 +59,129 @@ export default function MyOrdersPage() {
 
         if (isAuthenticated) {
             fetchOrders();
-            // Poll for updates every 5 seconds
             const interval = setInterval(fetchOrders, 5000);
             return () => clearInterval(interval);
         }
     }, [isAuthenticated]);
 
-    const getStatusColor = (status: string) => {
-        switch (status.toLowerCase()) {
-            case "placed": return "text-blue-500 bg-blue-50";
-            case "preparing": return "text-orange-500 bg-orange-50";
-            case "outfordelivery": return "text-purple-500 bg-purple-50";
-            case "delivered": return "text-green-500 bg-green-50";
-            case "cancelled": return "text-red-500 bg-red-50";
-            default: return "text-gray-500 bg-gray-50";
-        }
-    };
-
-    const getStatusIcon = (status: string) => {
-        switch (status.toLowerCase()) {
-            case "placed": return <Package size={16} />;
-            case "preparing": return <ChefHat size={16} />;
-            case "outfordelivery": return <Truck size={16} />;
-            case "delivered": return <CheckCircle size={16} />;
-            case "cancelled": return <XCircle size={16} />;
-            default: return <Clock size={16} />;
-        }
-    };
-
     if (loading || authLoading) {
         return (
-            <div className="min-h-screen pt-32 flex items-center justify-center bg-mint-whisper">
+            <div className="min-h-screen pt-32 flex items-center justify-center bg-gray-50">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-green"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-mint-whisper pt-24 pb-20">
-            <div className="max-w-4xl mx-auto px-6">
-                <h1 className="text-3xl font-bold text-dark-evergreen mb-8" style={{ fontFamily: "var(--font-playfair)" }}>My Orders</h1>
+        <div className="min-h-screen bg-gray-100 pb-20">
+            {/* Swiggy Style App Bar */}
+            <div className="bg-white border-b border-gray-100 pt-16 sm:pt-20">
+                <div className="max-w-2xl mx-auto px-4 py-4 flex justify-between items-center bg-white sticky top-0 z-10">
+                    <div className="flex items-center gap-4">
+                        <Link href="/" className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                            <ArrowLeft size={24} className="text-gray-800" />
+                        </Link>
+                        <h1 className="text-lg font-bold text-gray-900 tracking-wide uppercase">My Account</h1>
+                    </div>
+                    <button className="bg-orange-50 text-orange-500 font-bold px-4 py-1.5 rounded-full text-sm hover:bg-orange-100 transition-colors">
+                        Help
+                    </button>
+                </div>
+            </div>
+
+            <div className="max-w-2xl mx-auto mt-6 px-4">
+                <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Past Orders</h2>
 
                 {orders.length === 0 ? (
-                    <div className="text-center py-16 bg-white rounded-3xl shadow-sm border border-emerald-green/5">
-                        <Package size={48} className="mx-auto text-emerald-green/30 mb-4" />
-                        <h2 className="text-xl font-semibold text-dark-evergreen mb-2">No orders yet</h2>
-                        <p className="text-emerald-dark/60 mb-6">Looks like you haven't placed any orders yet.</p>
+                    <div className="text-center py-16 bg-white rounded-2xl shadow-sm">
+                        <Package size={48} className="mx-auto text-gray-300 mb-4" />
+                        <h2 className="text-xl font-bold text-gray-800 mb-2">No orders yet</h2>
+                        <p className="text-gray-500 mb-6">Looks like you haven't placed any orders yet.</p>
                         <button
                             onClick={() => router.push("/menu")}
-                            className="px-6 py-2.5 bg-emerald-green text-white rounded-full font-bold hover:bg-emerald-dark transition-colors"
+                            className="px-6 py-2.5 bg-orange-500 text-white rounded-lg font-bold hover:bg-orange-600 transition-colors"
                         >
                             Start Ordering
                         </button>
                     </div>
                 ) : (
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                         {orders.map((order, index) => (
                             <motion.div
                                 key={order._id}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                className="bg-white rounded-2xl p-6 shadow-sm border border-emerald-green/5 overflow-hidden"
+                                transition={{ delay: index * 0.05 }}
+                                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-md transition-all duration-200"
+                                onClick={() => router.push(`/my-orders/${order._id}`)}
                             >
-                                <div className="flex flex-wrap justify-between items-start gap-4 mb-6 border-b border-gray-100 pb-4">
-                                    <div>
-                                        <span className="text-xs text-emerald-dark/40 font-bold uppercase tracking-wider">Order ID</span>
-                                        <p className="font-mono text-sm text-dark-evergreen">#{order._id.slice(-6).toUpperCase()}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-xs text-emerald-dark/40 font-bold uppercase tracking-wider">Date</span>
-                                        <p className="text-sm text-dark-evergreen">{new Date(order.createdAt).toLocaleDateString()}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-xs text-emerald-dark/40 font-bold uppercase tracking-wider">Total</span>
-                                        <p className="text-sm font-bold text-emerald-green">&#8377;{order.totalAmount}</p>
-                                    </div>
-                                    <div className={`px-3 py-1 rounded-full flex items-center gap-2 text-xs font-bold ${getStatusColor(order.orderStatus)}`}>
-                                        {getStatusIcon(order.orderStatus)}
-                                        <span className="capitalize">{order.orderStatus === 'OutForDelivery' ? 'Out for Delivery' : order.orderStatus}</span>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-4">
-                                    {order.items.map((item, i) => (
-                                        <div key={i} className="flex items-center gap-4">
-                                            <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
-                                                {item.image ? (
-                                                    <Image src={item.image} alt={item.name} fill className="object-cover" />
-                                                ) : (
-                                                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                                        <Package size={20} />
-                                                    </div>
-                                                )}
+                                <div className="p-4 sm:p-5">
+                                    {/* Card Header */}
+                                    <div className="flex justify-between items-start mb-4">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden relative shadow-sm border border-gray-200">
+                                                <Image 
+                                                    src={order.items[0]?.image || "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=400&fit=crop"} 
+                                                    alt="Restaurant" 
+                                                    fill 
+                                                    className="object-cover" 
+                                                />
                                             </div>
-                                            <div className="flex-1">
-                                                <p className="text-sm font-medium text-dark-evergreen">{item.name}</p>
-                                                <p className="text-xs text-emerald-dark/50">Qty: {item.quantity}</p>
+                                            <div>
+                                                <h3 className="font-bold text-gray-900 leading-tight">The Oxford Kitchen</h3>
+                                                <p className="text-xs text-gray-500">Central Oxford</p>
                                             </div>
-                                            <p className="text-sm font-medium text-dark-evergreen">&#8377;{item.price * item.quantity}</p>
                                         </div>
-                                    ))}
+                                        
+                                        <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded">
+                                            <span className={`text-xs font-bold flex items-center gap-1 ${
+                                                order.orderStatus === 'Delivered' ? 'text-green-600' : 'text-orange-500'
+                                            }`}>
+                                                {order.orderStatus === 'Delivered' ? 'Delivered' : order.orderStatus || 'Processing'}
+                                                {order.orderStatus === 'Delivered' ? <CheckCircle size={14} /> : <Clock size={14} className="animate-pulse" />}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Order Items Info */}
+                                    <div className="border-b border-dashed border-gray-200 pb-4 mb-4">
+                                        <p className="text-sm text-gray-700 bg-gray-50 inline-block px-3 py-1 rounded flex items-center gap-2">
+                                            <span className="font-bold text-gray-500 bg-white px-1.5 shadow-sm text-xs border border-gray-200">{order.items.length}X</span>
+                                            {order.items.map(i => i.name).join(', ')}
+                                        </p>
+                                    </div>
+
+                                    {/* Ratings grid placeholder */}
+                                    <div className="grid grid-cols-2 gap-4 mb-5">
+                                        <div>
+                                            <p className="text-xs text-gray-500 mb-1.5">Your Food Rating</p>
+                                            <div className="flex gap-1 text-gray-300">
+                                                {[...Array(5)].map((_, i) => <Star key={i} size={16} />)}
+                                            </div>
+                                        </div>
+                                        <div className="pl-4 border-l border-gray-100">
+                                            <p className="text-xs text-gray-500 mb-1.5">Delivery Rating</p>
+                                            <div className="flex gap-1 text-gray-300">
+                                                {[...Array(5)].map((_, i) => <Star key={i} size={16} />)}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Reorder Button */}
+                                    <button 
+                                        onClick={(e) => {
+                                            e.stopPropagation(); // prevent clicking the card
+                                            router.push("/menu");
+                                        }}
+                                        className="w-full bg-orange-50 hover:bg-orange-100 text-orange-500 font-bold py-2.5 rounded-lg text-sm tracking-wide transition-colors mb-4 flex justify-center items-center gap-1 group"
+                                    >
+                                        REORDER <span className="group-hover:translate-x-1 transition-transform">&gt;</span>
+                                    </button>
+
+                                    {/* Footer Info */}
+                                    <p className="text-xs text-gray-500 font-medium border-t border-gray-100 pt-3">
+                                        Ordered: {new Date(order.createdAt).toLocaleDateString(undefined, {month: 'long', day:'numeric', hour:'numeric', minute:'numeric'})} • Bill Total: &#8377;{order.totalAmount}
+                                    </p>
                                 </div>
                             </motion.div>
                         ))}

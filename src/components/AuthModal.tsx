@@ -332,16 +332,16 @@ export default function AuthModal() {
                                 <div className="mt-6">
                                     <GoogleLogin
                                         onSuccess={async (credentialResponse) => {
+                                            console.log('GOOGLE_AUTH_DEBUG: Frontend credentialResponse:', credentialResponse);
                                             try {
                                                 const res = await fetch('/api/auth/google', {
                                                     method: 'POST',
                                                     headers: { 'Content-Type': 'application/json' },
-                                                    body: JSON.stringify({ token: credentialResponse.credential }),
+                                                    body: JSON.stringify({ credential: credentialResponse.credential }),
                                                 });
                                                 const data = await res.json();
                                                 if (res.ok) {
-                                                    if (isLogin) login(data.token, data.user);
-                                                    else signup(data.token, data.user);
+                                                    login("", data.user);
                                                     toast.success('Logged in with Google!');
                                                 } else {
                                                     toast.error('Google Auth Failed');

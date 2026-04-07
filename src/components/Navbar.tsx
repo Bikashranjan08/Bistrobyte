@@ -8,8 +8,7 @@ import Image from "next/image";
 import { Menu, X, Search, ShoppingBag, ArrowLeft } from "lucide-react";
 import { menuData, MenuItem } from "@/lib/menuData";
 import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context/AuthContext";
-import AuthModal from "./AuthModal";
+import { SignInButton, UserButton, Show } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
@@ -29,7 +28,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const isMenuPage = pathname === "/menu";
   const { cartCount } = useCart();
-  const { isAuthenticated, user, logout, openModal } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -165,49 +163,31 @@ export default function Navbar() {
 
 
             {/* Login/User Button */}
-            {isAuthenticated ? (
+            <Show when="signed-out">
+              <SignInButton mode="modal">
+                <button className="ml-2 px-5 py-2.5 rounded-full border border-dark-evergreen/10 text-dark-evergreen font-bold text-sm hover:bg-dark-evergreen hover:text-white transition-all duration-300">
+                  Login
+                </button>
+              </SignInButton>
+            </Show>
+            <Show when="signed-in">
               <div className="ml-2 flex items-center gap-3">
-                <Link href="/profile" className="w-10 h-10 rounded-full bg-emerald-green/10 flex items-center justify-center text-emerald-dark border border-emerald-green/20 hover:border-emerald-green hover:scale-105 transition-all overflow-hidden cursor-pointer">
-                  {user?.avatar ? (
-                    <Image
-                      src={user.avatar}
-                      alt={user.name || "User"}
-                      width={40}
-                      height={40}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="font-bold text-sm">
-                      {user?.name?.charAt(0).toUpperCase()}
-                    </span>
-                  )}
+                <Link
+                  href="/my-orders"
+                  className="px-4 py-2 text-sm font-semibold text-dark-evergreen bg-emerald-green/5 hover:bg-emerald-green/10 hover:text-emerald-green rounded-full transition-all"
+                >
+                  My Orders
                 </Link>
-                <div className="flex flex-col items-start">
-                  <Link href="/profile" className="text-xs font-bold text-emerald-dark hover:text-emerald-green transition-colors mb-0.5">
-                    My Profile
-                  </Link>
-                  <Link href="/my-orders" className="text-xs font-bold text-emerald-dark/60 hover:text-emerald-green transition-colors mb-0.5">
-                    My Orders
-                  </Link>
-                  <button
-                    onClick={logout}
-                    className="text-xs font-bold text-emerald-dark/60 hover:text-red-500 transition-colors"
-                  >
-                    Logout
-                  </button>
-                </div>
+                <UserButton 
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: "w-10 h-10"
+                    }
+                  }}
+                />
               </div>
-            ) : (
-              <button
-                onClick={openModal}
-                className="ml-2 px-5 py-2.5 rounded-full border border-dark-evergreen/10 text-dark-evergreen font-bold text-sm hover:bg-dark-evergreen hover:text-white transition-all duration-300"
-              >
-                Login
-              </button>
-            )}
+            </Show>
           </div>
-
-          <AuthModal />
 
           {/* Mobile Toggle */}
           <div className="flex md:hidden items-center gap-2">
@@ -411,28 +391,10 @@ export default function Navbar() {
                   transition={{ delay: 0.2 }}
                   className="mt-4 pt-4 border-t border-light-border/30"
                 >
-                  {isAuthenticated ? (
+                  <Show when="signed-in">
                     <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-3 px-4 py-3 bg-emerald-green/5 rounded-lg">
-                        <div className="w-12 h-12 rounded-full bg-emerald-green/10 flex items-center justify-center text-emerald-dark border-2 border-emerald-green/20 overflow-hidden shrink-0">
-                          {user?.avatar ? (
-                            <Image
-                              src={user.avatar}
-                              alt={user.name || "User"}
-                              width={48}
-                              height={48}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <span className="font-bold text-lg">
-                              {user?.name?.charAt(0).toUpperCase()}
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-sm font-bold text-dark-evergreen">{user?.name}</span>
-                          <span className="text-xs text-dark-evergreen/60">{user?.email}</span>
-                        </div>
+                      <div className="px-4 py-3 bg-emerald-green/5 rounded-lg">
+                        <UserButton showName />
                       </div>
                       <Link
                         href="/profile"
@@ -448,27 +410,15 @@ export default function Navbar() {
                       >
                         My Orders
                       </Link>
-                      <button
-                        onClick={() => {
-                          logout();
-                          setMobileOpen(false);
-                        }}
-                        className="block px-4 py-3 text-sm font-semibold text-red-500 hover:bg-red-50 rounded-lg transition-all text-left"
-                      >
-                        Logout
-                      </button>
                     </div>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        openModal();
-                        setMobileOpen(false);
-                      }}
-                      className="w-full px-6 py-3 bg-gradient-to-r from-emerald-green to-emerald-dark text-white text-base font-bold rounded-xl shadow-lg shadow-emerald-green/20 hover:shadow-emerald-green/40 active:scale-95 transition-all"
-                    >
-                      Login / Sign Up
-                    </button>
-                  )}
+                  </Show>
+                  <Show when="signed-out">
+                    <SignInButton mode="modal">
+                      <button className="w-full px-6 py-3 bg-gradient-to-r from-emerald-green to-emerald-dark text-white text-base font-bold rounded-xl shadow-lg shadow-emerald-green/20 hover:shadow-emerald-green/40 active:scale-95 transition-all">
+                        Login / Sign Up
+                      </button>
+                    </SignInButton>
+                  </Show>
                 </motion.div>
 
                 {/* Order Now CTA */}

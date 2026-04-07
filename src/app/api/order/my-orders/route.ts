@@ -1,26 +1,40 @@
 import { NextResponse } from 'next/server';
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import { cookies } from 'next/headers';
-import dbConnect from '@/lib/db';
-import Order from '@/models/Order';
+import { auth } from '@clerk/nextjs/server';
+import { supabase } from '@/lib/supabase';
 
 export async function GET() {
     try {
-        const cookieStore = await cookies();
-        const token = cookieStore.get('token');
+        const { userId } = await auth();
 
-        if (!token) {
+        if (!userId) {
             return NextResponse.json(
                 { message: 'Unauthorized' },
                 { status: 401 }
             );
         }
 
-        const decoded = jwt.verify(token.value, process.env.JWT_SECRET!) as JwtPayload;
+        const { data: dbOrders, error } = await supabase
+            .from('orders')
+            .select('*')
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false });
 
-        await dbConnect();
+        if (error) {
+            console.error('Supabase Error:', error);
+            throw error;
+        }
 
-        const orders = await Order.find({ userId: decoded.userId }).sort({ createdAt: -1 });
+        const orders = dbOrders.map(order => ({
+            ...order,
+            _id: order.id,
+            totalAmount: order.total_amount,
+            deliveryAddress: order.delivery_address,
+            phoneNumber: order.phone_number,
+            paymentMethod: order.payment_method,
+            paymentStatus: order.payment_status,
+            orderStatus: order.order_status,
+            createdAt: order.created_at
+        }));
 
         return NextResponse.json({ orders }, { status: 200 });
 

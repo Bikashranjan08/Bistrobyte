@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context/AuthContext";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { menuData } from "@/lib/menuData";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,7 +15,8 @@ import AddressModal from "@/components/AddressModal";
 
 export default function CartPage() {
     const { cartItems, updateQuantity, removeFromCart, cartTotal, addToCart } = useCart();
-    const { isAuthenticated, openModal, user, updateProfile } = useAuth();
+    const { isSignedIn: isAuthenticated, user } = useUser();
+    const { openSignIn: openModal } = useClerk();
 
     // Get some suggested items (e.g., from Starters or Desserts)
     const suggestions = [
@@ -35,14 +36,13 @@ export default function CartPage() {
 
         // If user already has full address, proceed (or show confirmation? let's just show modal if missing)
         // Check if user has phone and address
-        if (!user?.phone || !user?.address?.street) {
+        const phone = user?.unsafeMetadata?.phone as string | undefined;
+        const address = user?.unsafeMetadata?.address as any;
+
+        if (!phone || !address?.street) {
             setShowAddressModal(true);
         } else {
-            // If they have it, just proceed (or we could show the modal pre-filled to confirm)
-            // For better UX, let's just proceed if they have it, or show modal to confirm?
-            // Prompt: "Fast2SMS for all stuff required".
-            // Let's show modal if missing.
-            placeOrder(user.address, user.phone);
+            placeOrder(address, phone);
         }
     };
 
@@ -60,18 +60,24 @@ export default function CartPage() {
                 }),
             });
 
-            if (res.ok) {
-                // Update local profile if it was just added via modal (implicit in context updateProfile if we had one)
-                // For now, rely on backend update.
-                if (user && (!user.phone || !user.address)) {
-                    updateProfile({ phone: phoneNumber, address });
-                }
-
-                toast.success("Order placed successfully!");
-                router.push("/my-orders");
-            } else {
-                toast.error("Failed to place order.");
+        if (res.ok) {
+            const data = await res.json();
+            // Update local profile if it was just added via modal
+            if (user && (!user.unsafeMetadata.phone || !user.unsafeMetadata.address)) {
+                user.update({
+                    unsafeMetadata: {
+                        ...user.unsafeMetadata,
+                        phone: phoneNumber,
+                        address: address
+                    }
+                });
             }
+
+            toast.success("Order placed successfully!");
+            router.push(`/my-orders/${data.order._id}`);
+        } else {
+            toast.error("Failed to place order.");
+        }
         } catch (error) {
             console.error("Checkout error", error);
             toast.error("Something went wrong.");
@@ -90,8 +96,8 @@ export default function CartPage() {
                     const { phoneNumber, ...address } = data;
                     placeOrder(address, phoneNumber);
                 }}
-                initialPhone={user?.phone}
-                initialAddress={user?.address}
+                initialPhone={user?.unsafeMetadata?.phone as string | undefined}
+                initialAddress={user?.unsafeMetadata?.address as any}
             />
             <div className="pt-20 sm:pt-24 lg:pt-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
                 <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 gap-6 lg:gap-12">
