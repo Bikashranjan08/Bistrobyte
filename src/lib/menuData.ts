@@ -26,7 +26,9 @@ export const menuData: MenuCategory[] = [
       { name: "Cream of Tomato Soup", price: 90, image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=400&fit=crop" },
       { name: "Cream of Mushroom Soup", price: 90, image: "https://images.unsplash.com/photo-1604152135912-04a022e23696?w=400&h=400&fit=crop" },
       { name: "Mushroom Soup", price: 90, image: "https://images.unsplash.com/photo-1604152135912-04a022e23696?w=400&h=400&fit=crop" },
-      { name: "Nilkanth Spl Veg Soup", price: 100, image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=400&fit=crop" },
+      { name: "BistroByte Spl Veg Soup", price: 100, image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=400&fit=crop" },
+      { name: "Chicken Hot N Sour Soup", price: 90, image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&h=400&fit=crop" },
+      { name: "Chicken Sweet Corn Soup", price: 90, image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&h=400&fit=crop" },
     ],
   },
   {
@@ -84,6 +86,9 @@ export const menuData: MenuCategory[] = [
       { name: "Crispy Chilli Baby Corn", price: 160, image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=400&h=400&fit=crop" },
       { name: "Baby Corn Manchurian", price: 120, image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=400&h=400&fit=crop" },
       { name: "Honey Chilli Potato", price: 100, image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=400&h=400&fit=crop" },
+      { name: "Chicken Chilli", price: 200, image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=400&fit=crop" },
+      { name: "Chicken 65", price: 200, image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=400&fit=crop" },
+      { name: "Fish Tikka", price: 250, image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=400&fit=crop" },
     ],
   },
   {
@@ -169,6 +174,9 @@ export const menuData: MenuCategory[] = [
       { name: "Veg Handi", price: 120, image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=400&fit=crop" },
       { name: "Veg Kolhapuri", price: 150, image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=400&fit=crop" },
       { name: "Veg Makhani", price: 150, image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=400&fit=crop" },
+      { name: "Chicken Butter Masala", price: 280, image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" },
+      { name: "Mutton Rogan Josh", price: 350, image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" },
+      { name: "Chicken Kolhapuri", price: 260, image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" },
     ],
   },
   {
@@ -197,6 +205,9 @@ export const menuData: MenuCategory[] = [
       { name: "Spl Veg Biryani", price: 180, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
       { name: "Paneer Biryani", price: 180, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
       { name: "Mushroom Biryani", price: 180, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
+      { name: "Chicken Biryani", price: 220, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
+      { name: "Mutton Biryani", price: 320, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
+      { name: "Egg Biryani", price: 180, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
     ],
   },
   {
@@ -214,6 +225,8 @@ export const menuData: MenuCategory[] = [
       { name: "Singaporean Noodles", price: 130, image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=400&fit=crop" },
       { name: "Schezwan Noodles", price: 130, image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=400&fit=crop" },
       { name: "Triple Noodles", price: 150, image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=400&fit=crop" },
+      { name: "Chicken Noodles", price: 140, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=400&fit=crop" },
+      { name: "Egg Noodles", price: 120, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=400&fit=crop" },
     ],
   },
   {
@@ -230,6 +243,8 @@ export const menuData: MenuCategory[] = [
       { name: "Sesame Garlic Fried Rice", price: 150, image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=400&fit=crop" },
       { name: "Singaporean Fried Rice", price: 150, image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=400&fit=crop" },
       { name: "Schezwan Fried Rice", price: 150, image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=400&fit=crop" },
+      { name: "Chicken Fried Rice", price: 160, image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=400&fit=crop" },
+      { name: "Egg Fried Rice", price: 140, image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=400&fit=crop" },
     ],
   },
   {
@@ -268,6 +283,28 @@ export const menuData: MenuCategory[] = [
       { name: "Masala Soda", price: 50, image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=400&fit=crop" },
     ],
   },
+  {
+    id: "non-veg",
+    title: "Non-Veg",
+    emoji: "🍗",
+    items: [
+      { name: "Chicken Chilli", price: 200, image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=400&fit=crop" },
+      { name: "Chicken 65", price: 200, image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=400&fit=crop" },
+      { name: "Fish Tikka", price: 250, image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=400&fit=crop" },
+      { name: "Chicken Butter Masala", price: 280, image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" },
+      { name: "Mutton Rogan Josh", price: 350, image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" },
+      { name: "Chicken Kolhapuri", price: 260, image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" },
+      { name: "Chicken Biryani", price: 220, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
+      { name: "Mutton Biryani", price: 320, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
+      { name: "Egg Biryani", price: 180, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=400&fit=crop" },
+      { name: "Chicken Hot N Sour Soup", price: 90, image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&h=400&fit=crop" },
+      { name: "Chicken Sweet Corn Soup", price: 90, image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&h=400&fit=crop" },
+      { name: "Chicken Noodles", price: 140, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=400&fit=crop" },
+      { name: "Egg Noodles", price: 120, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=400&fit=crop" },
+      { name: "Chicken Fried Rice", price: 160, image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=400&fit=crop" },
+      { name: "Egg Fried Rice", price: 140, image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=400&fit=crop" },
+    ],
+  },
 ];
 
 // Placeholder image URLs using food category-based SVG placeholders
@@ -285,4 +322,5 @@ export const categoryImages: Record<string, string> = {
   "naan-roti": "https://images.unsplash.com/photo-1626074353765-517a681e40be?w=400&h=400&fit=crop",
   desserts: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop",
   "cold-drinks": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=400&fit=crop",
+  "non-veg": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=400&fit=crop",
 };

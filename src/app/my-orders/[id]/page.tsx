@@ -4,7 +4,7 @@ import { useEffect, useState, use } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowLeft, CheckCircle, Clock, MapPin, Truck, ChefHat, Home, HelpCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Clock, MapPin, Truck, ChefHat, Home, HelpCircle, Printer } from "lucide-react";
 
 interface OrderItem {
     name: string;
@@ -85,12 +85,12 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
     const deliveryFee = 0;
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-20">
+        <div className="min-h-screen bg-gray-50 pb-20 print:pb-0 print:bg-white">
             {/* Header */}
-            <div className="bg-white border-b border-gray-100 pt-20">
+            <div className="bg-white border-b border-gray-100 pt-20 print:pt-4">
                 <div className="max-w-2xl mx-auto px-4 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-4">
-                        <button onClick={() => router.push("/my-orders")} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                        <button onClick={() => router.push("/my-orders")} className="p-2 hover:bg-gray-100 rounded-full transition-colors print:hidden">
                             <ArrowLeft size={24} className="text-gray-800" />
                         </button>
                         <div>
@@ -100,27 +100,32 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                             </p>
                         </div>
                     </div>
-                    <button className="text-orange-500 font-bold text-sm tracking-wide lowercase" style={{fontVariant: 'small-caps'}}>
-                        Help
-                    </button>
+                    <div className="flex items-center gap-4 print:hidden">
+                        <button onClick={() => window.print()} className="text-gray-600 hover:text-emerald-green font-bold text-sm tracking-wide flex items-center gap-1.5 transition-colors" style={{ fontVariant: 'small-caps' }}>
+                            <Printer size={16} /> Print
+                        </button>
+                        <button className="text-orange-500 font-bold text-sm tracking-wide lowercase" style={{ fontVariant: 'small-caps' }}>
+                            Help
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <div className="max-w-2xl mx-auto space-y-2">
-                
+
                 {/* Live Track Map using OpenStreetMap */}
                 {(order.orderStatus === "OutForDelivery" || order.orderStatus === "Placed" || order.orderStatus === "Preparing") && (
-                    <div className="w-full h-48 bg-gray-200 relative">
+                    <div className="w-full h-48 bg-gray-200 relative print:hidden">
                         {/* Using a rough generic embed. A real implementation would use dynamic lat/lon. */}
-                        <iframe 
-                            width="100%" 
-                            height="100%" 
-                            frameBorder="0" 
-                            scrolling="no" 
-                            marginHeight={0} 
-                            marginWidth={0} 
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=-1.261%2C51.750%2C-1.251%2C51.758&layer=mapnik" 
-                            style={{border: "1px solid #e5e7eb"}}
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            frameBorder="0"
+                            scrolling="no"
+                            marginHeight={0}
+                            marginWidth={0}
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=84.780%2C19.310%2C84.810%2C19.325&layer=mapnik&marker=19.3175,84.7950"
+                            style={{ border: "1px solid #e5e7eb" }}
                         />
                         <div className="absolute bottom-2 right-2 bg-white px-2 py-1 text-xs font-bold rounded shadow text-gray-600">
                             Live map (OpenStreetMap)
@@ -134,18 +139,18 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                     <div className="relative pl-6 space-y-6">
                         {/* Line connecting the icons */}
                         <div className="absolute left-[11px] top-4 bottom-6 border-l-2 border-dashed border-gray-300"></div>
-                        
+
                         {/* Origin (Restaurant) */}
                         <div className="relative">
                             <div className="absolute -left-6 bg-white w-[22px] h-[22px] flex items-center justify-center">
                                 <MapPin size={16} className="text-gray-400" />
                             </div>
-                            <h3 className="font-bold text-orange-500 text-base">The Oxford Kitchen</h3>
+                            <h3 className="font-bold text-orange-500 text-base">BistroByte</h3>
                             <p className="text-sm text-gray-500 mt-1 line-clamp-2">
-                                Central Oxford, Downtown Area, Sector 5, Local Hub
+                                LOCHAPADA, BERHAMPUR ODISHA, 760001
                             </p>
                         </div>
-                        
+
                         {/* Destination (Home) */}
                         <div className="relative">
                             <div className="absolute -left-6 bg-white w-[22px] h-[22px] flex items-center justify-center">
@@ -165,8 +170,8 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                         </div>
                         <div>
                             <p className="text-gray-800 text-sm font-medium">
-                                {order.orderStatus === "Delivered" 
-                                    ? `Order delivered on ${new Date(order.createdAt).toLocaleDateString()}` 
+                                {order.orderStatus === "Delivered"
+                                    ? `Order delivered on ${new Date(order.createdAt).toLocaleDateString()}`
                                     : `Order is currently ${order.orderStatus || 'in progress'}`}
                             </p>
                             {order.orderStatus === "Delivered" && (
@@ -181,7 +186,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                     <div className="p-4 bg-gray-50 border-b border-gray-100">
                         <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest">Bill Details</h2>
                     </div>
-                    
+
                     <div className="p-4 space-y-4">
                         {/* Items list */}
                         {order.items.map((item, idx) => (
@@ -229,7 +234,10 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                 </div>
 
                 {/* Bottom Spacer & Action */}
-                <div className="bg-white p-4 mt-4 mb-2 shadow-sm text-center">
+                <div className="bg-white p-4 mt-4 mb-2 shadow-sm text-center flex flex-col gap-3 print:hidden">
+                    <button onClick={() => window.print()} className="bg-emerald-green/10 hover:bg-emerald-green/20 text-emerald-dark font-bold tracking-wide uppercase text-sm w-full py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <Printer size={18} /> Print Receipt
+                    </button>
                     <button onClick={() => router.push("/menu")} className="text-orange-500 font-bold tracking-wide uppercase text-sm w-full py-2 hover:bg-orange-50 rounded-lg transition-colors">
                         Reorder
                     </button>

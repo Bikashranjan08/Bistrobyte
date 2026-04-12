@@ -14,7 +14,7 @@ import { ArrowLeft, Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
 import AddressModal from "@/components/AddressModal";
 
 export default function CartPage() {
-    const { cartItems, updateQuantity, removeFromCart, cartTotal, addToCart } = useCart();
+    const { cartItems, updateQuantity, removeFromCart, cartTotal, addToCart, clearCart } = useCart();
     const { isSignedIn: isAuthenticated, user } = useUser();
     const { openSignIn: openModal } = useClerk();
 
@@ -60,24 +60,25 @@ export default function CartPage() {
                 }),
             });
 
-        if (res.ok) {
-            const data = await res.json();
-            // Update local profile if it was just added via modal
-            if (user && (!user.unsafeMetadata.phone || !user.unsafeMetadata.address)) {
-                user.update({
-                    unsafeMetadata: {
-                        ...user.unsafeMetadata,
-                        phone: phoneNumber,
-                        address: address
-                    }
-                });
-            }
+            if (res.ok) {
+                const data = await res.json();
+                // Update local profile if it was just added via modal
+                if (user && (!user.unsafeMetadata.phone || !user.unsafeMetadata.address)) {
+                    user.update({
+                        unsafeMetadata: {
+                            ...user.unsafeMetadata,
+                            phone: phoneNumber,
+                            address: address
+                        }
+                    });
+                }
 
-            toast.success("Order placed successfully!");
-            router.push(`/my-orders/${data.order._id}`);
-        } else {
-            toast.error("Failed to place order.");
-        }
+                toast.success("Order placed successfully!");
+                clearCart();
+                router.push(`/my-orders/${data.order._id}`);
+            } else {
+                toast.error("Failed to place order.");
+            }
         } catch (error) {
             console.error("Checkout error", error);
             toast.error("Something went wrong.");

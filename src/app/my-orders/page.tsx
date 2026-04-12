@@ -120,23 +120,22 @@ export default function MyOrdersPage() {
                                     <div className="flex justify-between items-start mb-4">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden relative shadow-sm border border-gray-200">
-                                                <Image 
-                                                    src={order.items[0]?.image || "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=400&fit=crop"} 
-                                                    alt="Restaurant" 
-                                                    fill 
-                                                    className="object-cover" 
+                                                <Image
+                                                    src={order.items[0]?.image || "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=400&fit=crop"}
+                                                    alt="Restaurant"
+                                                    fill
+                                                    className="object-cover"
                                                 />
                                             </div>
                                             <div>
-                                                <h3 className="font-bold text-gray-900 leading-tight">The Oxford Kitchen</h3>
-                                                <p className="text-xs text-gray-500">Central Oxford</p>
+                                                <h3 className="font-bold text-gray-900 leading-tight">BistroByte</h3>
+                                                <p className="text-xs text-gray-500">LOCHAPADA, BERHAMPUR ODISHA, 760001</p>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded">
-                                            <span className={`text-xs font-bold flex items-center gap-1 ${
-                                                order.orderStatus === 'Delivered' ? 'text-green-600' : 'text-orange-500'
-                                            }`}>
+                                            <span className={`text-xs font-bold flex items-center gap-1 ${order.orderStatus === 'Delivered' ? 'text-green-600' : 'text-orange-500'
+                                                }`}>
                                                 {order.orderStatus === 'Delivered' ? 'Delivered' : order.orderStatus || 'Processing'}
                                                 {order.orderStatus === 'Delivered' ? <CheckCircle size={14} /> : <Clock size={14} className="animate-pulse" />}
                                             </span>
@@ -168,7 +167,7 @@ export default function MyOrdersPage() {
                                     </div>
 
                                     {/* Reorder Button */}
-                                    <button 
+                                    <button
                                         onClick={(e) => {
                                             e.stopPropagation(); // prevent clicking the card
                                             router.push("/menu");
@@ -180,7 +179,7 @@ export default function MyOrdersPage() {
 
                                     {/* Footer Info */}
                                     <p className="text-xs text-gray-500 font-medium border-t border-gray-100 pt-3">
-                                        Ordered: {new Date(order.createdAt).toLocaleDateString(undefined, {month: 'long', day:'numeric', hour:'numeric', minute:'numeric'})} • Bill Total: &#8377;{order.totalAmount}
+                                        Ordered: {new Date(order.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })} • Bill Total: &#8377;{order.totalAmount}
                                     </p>
                                 </div>
                             </motion.div>

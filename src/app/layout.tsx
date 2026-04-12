@@ -19,20 +19,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Nilkanth - Authentic Cloud Kitchen | Mint & Amethyst Edition",
-  description: "Experience authentic vegetarian cuisine with Nilkanth. delicious soups, starters, curries, and more delivered with warmth. Order online now!",
-  keywords: ["cloud kitchen", "vegetarian food", "indian cuisine", "food delivery", "nilkanth", "authentic veg", "paneer", "soup", "biryani"],
+  title: "BistroByte - Authentic Cloud Kitchen | Mint & Amethyst Edition",
+  description: "Experience authentic vegetarian cuisine with BistroByte. delicious soups, starters, curries, and more delivered with warmth. Order online now!",
+  keywords: ["cloud kitchen", "vegetarian food", "indian cuisine", "food delivery", "bistrobyte", "authentic veg", "paneer", "soup", "biryani"],
   openGraph: {
-    title: "Nilkanth - Authentic Cloud Kitchen",
-    description: "Experience authentic vegetarian cuisine with Nilkanth. delicious soups, starters, curries, and more delivered with warmth.",
-    url: "https://nilkanth-kitchen.com", // Placeholder URL
-    siteName: "Nilkanth Cloud Kitchen",
+    title: "BistroByte - Authentic Cloud Kitchen",
+    description: "Experience authentic vegetarian cuisine with BistroByte. delicious soups, starters, curries, and more delivered with warmth.",
+    url: "https://bistrobyte-kitchen.com", // Placeholder URL
+    siteName: "BistroByte Cloud Kitchen",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nilkanth - Authentic Cloud Kitchen",
+    title: "BistroByte - Authentic Cloud Kitchen",
     description: "Authentic vegetarian cuisine delivered with warmth.",
   },
 };

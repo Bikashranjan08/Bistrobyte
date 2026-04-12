@@ -115,7 +115,7 @@ export default function AdminDashboard() {
                             <ChefHat size={24} className="text-white" />
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold text-gray-900 leading-tight">The Oxford Kitchen</h1>
+                            <h1 className="text-xl font-bold text-gray-900 leading-tight">BistroByte</h1>
                             <p className="text-xs text-gray-500 font-medium tracking-wide uppercase">Partner Dashboard</p>
                         </div>
                     </div>
@@ -143,7 +143,7 @@ export default function AdminDashboard() {
                     {orders.map((order) => {
                         const itemTotal = order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
                         const taxes = Math.round(itemTotal * 0.05); // Standard tax match frontend
-                        
+
                         return (
                             <div key={order._id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
                                 {/* Header */}
@@ -151,7 +151,7 @@ export default function AdminDashboard() {
                                     <div>
                                         <h3 className="font-bold text-lg text-gray-900">#{order._id.slice(-6).toUpperCase()}</h3>
                                         <p className="text-xs text-gray-500 flex items-center gap-1 font-medium mt-1">
-                                            <Clock size={12} /> {new Date(order.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                            <Clock size={12} /> {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                         </p>
                                     </div>
                                     <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${getStatusColor(order.orderStatus || 'Placed')}`}>
@@ -191,7 +191,7 @@ export default function AdminDashboard() {
                                         <ReceiptText size={16} />
                                         <h4 className="text-xs font-bold uppercase tracking-widest">Order Details</h4>
                                     </div>
-                                    
+
                                     <div className="space-y-3">
                                         {order.items.map((item, idx) => (
                                             <div key={idx} className="flex justify-between items-start text-sm">

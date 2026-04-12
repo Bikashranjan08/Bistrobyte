@@ -24,7 +24,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     // Load from localStorage on mount
     useEffect(() => {
-        const savedCart = localStorage.getItem("nilkanth-cart");
+        const savedCart = localStorage.getItem("bistrobyte-cart");
         if (savedCart) {
             try {
                 setCartItems(JSON.parse(savedCart));
@@ -36,7 +36,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     // Save to localStorage whenever cart changes
     useEffect(() => {
-        localStorage.setItem("nilkanth-cart", JSON.stringify(cartItems));
+        localStorage.setItem("bistrobyte-cart", JSON.stringify(cartItems));
     }, [cartItems]);
 
     const addToCart = (item: MenuItem) => {

@@ -65,24 +65,7 @@ export default function HeroSection() {
             style={{ y: textY, opacity }}
             className="relative z-10"
           >
-            {/* Tagline */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/60 backdrop-blur-md rounded-full mb-6 lg:mb-8 border border-emerald-green/10 shadow-sm"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-green opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-green" />
-              </span>
-              <span
-                className="text-xs font-semibold text-emerald-dark uppercase tracking-widest"
-                style={{ fontFamily: "var(--font-inter)" }}
-              >
-                Kinetic Culinary Art
-              </span>
-            </motion.div>
+            {/* Tagline Removed */}
 
             <div className="mb-6">
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-dark-evergreen leading-[1.1] tracking-tight">
@@ -136,20 +119,20 @@ export default function HeroSection() {
                   </motion.span>
                 </span>
               </Link>
-              <a
-                href="#about"
+              <Link
+                href="/#about"
                 className="px-6 lg:px-8 py-3 lg:py-4 border border-dark-evergreen/10 text-dark-evergreen font-medium rounded-full hover:bg-emerald-green/5 transition-all duration-300 hover:border-emerald-green/30 backdrop-blur-sm text-sm lg:text-base"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 Our Story
-              </a>
+              </Link>
             </motion.div>
 
             {/* Kinetic Stats */}
             <div className="mt-10 lg:mt-16 border-t border-emerald-green/10 pt-6 lg:pt-8 flex gap-10 lg:gap-12">
               {[
                 { value: "140+", label: "Dishes" },
-                { value: "100%", label: "Vegetarian" },
+                { value: "100%", label: "Authentic" },
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}

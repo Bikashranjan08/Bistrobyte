@@ -14,8 +14,8 @@ import { usePathname } from "next/navigation";
 const navLinks = [
   { label: "home", href: "/", isRoute: true },
   { label: "menu", href: "/menu", isRoute: true },
-  { label: "about us", href: "#about", isRoute: false }, // Updated per user request
-  { label: "contact us", href: "#contact", isRoute: false },
+  { label: "about us", href: "/#about", isRoute: true }, // Set to true if changing path
+  { label: "contact us", href: "/#contact", isRoute: true },
 ];
 
 export default function Navbar() {
@@ -72,7 +72,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 print:hidden ${scrolled
         ? "bg-white/80 backdrop-blur-xl shadow-[0_2px_30px_rgba(16,185,129,0.08)] border-b border-light-border/50"
         : "bg-transparent backdrop-blur-none"
         }`}
@@ -81,16 +81,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-[80px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group shrink-0">
-            <div className="relative w-32 h-16 md:w-40 md:h-20">
-              <Image
-                src="/logo.png"
-                alt="Nilkanth Logo"
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 128px, 160px"
-                priority
-              />
-            </div>
+            <span className="font-bold text-2xl md:text-3xl text-emerald-green tracking-tight" style={{ fontFamily: "var(--font-inter)" }}>
+              BistroByte
+            </span>
           </Link>
 
           {/* Center Nav Links */}
@@ -178,7 +171,7 @@ export default function Navbar() {
                 >
                   My Orders
                 </Link>
-                <UserButton 
+                <UserButton
                   appearance={{
                     elements: {
                       userButtonAvatarBox: "w-10 h-10"

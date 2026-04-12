@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://nilkanth-kitchen.com/sitemap.xml', // Placeholder URL
+        sitemap: 'https://bistrobyte-kitchen.com/sitemap.xml', // Placeholder URL
     };
 }

@@ -7,7 +7,7 @@ import NextImage from "next/image";
 const values = [
   {
     icon: Leaf,
-    title: "100% Vegetarian",
+    title: "100% Authentic",
     description: "Every dish is crafted with the finest vegetarian ingredients. No compromises, ever.",
   },
   {
@@ -31,7 +31,7 @@ const stats = [
   { number: "140+", label: "Dishes on Menu" },
   { number: "10+", label: "Cuisine Styles" },
   { number: "1000+", label: "Happy Customers" },
-  { number: "100%", label: "Pure Vegetarian" },
+  { number: "100%", label: "Pure Authentic" },
 ];
 
 /* Decorative mandala-style SVG corner ornament */
@@ -96,7 +96,7 @@ function MandalaCorner({ className }: { className?: string }) {
 export default function AboutSection() {
   return (
     <section id="about" className="relative overflow-hidden bg-mint-whisper">
-      {/* ═══ Hero: Pure Veg. Pure Love. ═══ */}
+      {/* ═══ Hero: Pure Authentic. Pure Love. ═══ */}
       <div className="relative py-24 sm:py-32 overflow-hidden">
         {/* Mandala corners */}
         <MandalaCorner className="absolute top-0 left-0 w-48 sm:w-64 h-48 sm:h-64 text-royal-amethyst" />
@@ -123,7 +123,7 @@ export default function AboutSection() {
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-dark-evergreen mb-6 leading-tight"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
-                Pure Veg.{" "}
+                Pure Authentic.{" "}
                 <span className="text-emerald-green">Pure Love.</span>
               </h2>
               <p
@@ -131,14 +131,14 @@ export default function AboutSection() {
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 From our modern cloud kitchen to your doorstep, we bring you the
-                authentic taste of Nilkanth. 100% vegetarian, prepared with care
+                authentic taste of BistroByte. 100% authentic, prepared with care
                 and hygiene.
               </p>
               <p
                 className="text-emerald-dark/70 text-base leading-relaxed"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
-                Born from a deep passion for authentic vegetarian cuisine, Nilkanth
+                Born from a deep passion for authentic vegetarian cuisine, BistroByte
                 Cloud Kitchen brings the rich flavors of North Indian, Chinese, and
                 Tandoori cooking right to your table. Every dish tells a story of
                 tradition, quality, and love.
@@ -233,7 +233,7 @@ export default function AboutSection() {
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-evergreen mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              The <span className="text-emerald-green">Nilkanth</span> Promise
+              The <span className="text-emerald-green">BistroByte</span> Promise
             </h2>
             <p
               className="text-emerald-dark/70 text-lg max-w-2xl mx-auto"
@@ -361,7 +361,7 @@ export default function AboutSection() {
                 <p className="text-emerald-dark/80 leading-relaxed">
                   From the classic <strong className="text-dark-evergreen">Paneer Butter Masala</strong> and{" "}
                   <strong className="text-dark-evergreen">Mushroom Tikka</strong> to our signature{" "}
-                  <strong className="text-dark-evergreen">Nilkanth Spl Veg Soup</strong> — each dish
+                  <strong className="text-dark-evergreen">BistroByte Spl Veg Soup</strong> — each dish
                   is a celebration of vegetarian excellence.
                 </p>
               </div>
@@ -423,7 +423,7 @@ export default function AboutSection() {
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { icon: ShieldCheck, text: "FSSAI Certified" },
-                    { icon: Leaf, text: "Pure Veg Only" },
+                    { icon: Leaf, text: "Pure Authentic Only" },
                     { icon: Flame, text: "Fresh Daily" },
                     { icon: Truck, text: "Safe Delivery" },
                   ].map((item) => (

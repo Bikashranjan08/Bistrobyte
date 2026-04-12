@@ -83,7 +83,7 @@ export default function Footer() {
                 >
                   Avamment Road,
                   <br />
-                  Nilkanth, IL-98001
+                  BistroByte, IL-98001
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -128,7 +128,7 @@ export default function Footer() {
               className="text-white/40 text-xs"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              &copy; {new Date().getFullYear()} Nilkanth Cloud Kitchen. All rights reserved.
+              &copy; {new Date().getFullYear()} BistroByte Cloud Kitchen. All rights reserved.
             </p>
             <Link
               href="/admin/login"
