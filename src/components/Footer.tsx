@@ -42,6 +42,54 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Partner With Us */}
+          <div>
+            <h4
+              className="text-base font-bold italic text-emerald-green mb-3"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              Partner With Us
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/restaurant/register"
+                  className="text-white/70 hover:text-emerald-green text-sm transition-colors duration-300"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  Register Restaurant
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/restaurant/login"
+                  className="text-white/70 hover:text-emerald-green text-sm transition-colors duration-300"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  Restaurant Login
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/delivery/register"
+                  className="text-white/70 hover:text-emerald-green text-sm transition-colors duration-300"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  Become Delivery Partner
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/delivery/login"
+                  className="text-white/70 hover:text-emerald-green text-sm transition-colors duration-300"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  Delivery Partner Login
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           {/* Follow Us */}
           <div>
             <h4

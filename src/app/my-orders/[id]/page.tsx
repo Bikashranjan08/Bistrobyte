@@ -4,7 +4,7 @@ import { useEffect, useState, use } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowLeft, CheckCircle, Clock, MapPin, Truck, ChefHat, Home, HelpCircle, Printer } from "lucide-react";
+import { ArrowLeft, CheckCircle, Clock, MapPin, Truck, ChefHat, Home, HelpCircle, Printer, Package, XCircle, Phone, User, Bike } from "lucide-react";
 
 interface OrderItem {
     name: string;
@@ -21,7 +21,20 @@ interface Order {
     paymentMethod: string;
     paymentStatus: string;
     orderStatus: string;
+    deliveryStatus?: string;
     createdAt: string;
+    restaurant_name?: string;
+    restaurant_id?: string;
+    restaurantAddress?: string;
+    restaurantCity?: string;
+    restaurantState?: string;
+    restaurantPincode?: string;
+    restaurantLatitude?: number;
+    restaurantLongitude?: number;
+    deliveryCharge?: number;
+    delivery_partner_name?: string;
+    delivery_partner_phone?: string;
+    delivery_partner_vehicle?: string;
     deliveryAddress?: {
         street: string;
         city: string;
@@ -67,6 +80,11 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
         };
 
         fetchOrder();
+        
+        // Auto-refresh order every 5 seconds for active orders
+        const interval = setInterval(fetchOrder, 5000);
+        
+        return () => clearInterval(interval);
     }, [id, isSignedIn, isLoaded, router]);
 
     if (loading || !isLoaded) {
@@ -80,9 +98,9 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
     if (!order) return null;
 
     const itemTotal = order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const taxes = Math.round(itemTotal * 0.05); // Fixed 5% tax from cart logic
+    const deliveryFee = order.deliveryCharge || 40; // Use actual delivery charge from order
+    const taxes = order.totalAmount - itemTotal - deliveryFee; // Calculate actual taxes
     const discount = 0; // Hardcoded generic
-    const deliveryFee = 0;
 
     return (
         <div className="min-h-screen bg-gray-50 pb-20 print:pb-0 print:bg-white">
@@ -114,9 +132,9 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
             <div className="max-w-2xl mx-auto space-y-2">
 
                 {/* Live Track Map using OpenStreetMap */}
-                {(order.orderStatus === "OutForDelivery" || order.orderStatus === "Placed" || order.orderStatus === "Preparing") && (
-                    <div className="w-full h-48 bg-gray-200 relative print:hidden">
-                        {/* Using a rough generic embed. A real implementation would use dynamic lat/lon. */}
+                {(order.orderStatus === "Out for Delivery" || order.orderStatus === "Placed" || order.orderStatus === "Preparing" || order.orderStatus === "Assigned to Driver" || order.orderStatus === "Ready for Dispatch" || order.orderStatus === "Looking for Driver") && (
+                    <div className="w-full h-64 bg-gray-200 relative print:hidden rounded-xl overflow-hidden shadow-sm">
+                        {/* Dynamic map showing route from restaurant to delivery */}
                         <iframe
                             width="100%"
                             height="100%"
@@ -124,18 +142,145 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                             scrolling="no"
                             marginHeight={0}
                             marginWidth={0}
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=84.780%2C19.310%2C84.810%2C19.325&layer=mapnik&marker=19.3175,84.7950"
-                            style={{ border: "1px solid #e5e7eb" }}
+                            src={`https://www.openstreetmap.org/export/embed.html?bbox=${(order.restaurantLongitude || 84.7950) - 0.02}%2C${(order.restaurantLatitude || 19.3175) - 0.01}%2C${(order.restaurantLongitude || 84.7950) + 0.02}%2C${(order.restaurantLatitude || 19.3175) + 0.01}&layer=mapnik&marker=${order.restaurantLatitude || 19.3175},${order.restaurantLongitude || 84.7950}`}
+                            style={{ border: "none" }}
                         />
-                        <div className="absolute bottom-2 right-2 bg-white px-2 py-1 text-xs font-bold rounded shadow text-gray-600">
-                            Live map (OpenStreetMap)
+                        
+                        {/* Delivery Partner Tracker Overlay */}
+                        {(order.orderStatus === "Assigned to Driver" || order.orderStatus === "Out for Delivery") && (
+                            <div className="absolute inset-0 pointer-events-none">
+                                {/* Animated delivery bike icon */}
+                                <div 
+                                    className="absolute transition-all duration-1000 ease-linear"
+                                    style={{
+                                        top: order.orderStatus === "Out for Delivery" ? "50%" : "30%",
+                                        left: order.orderStatus === "Out for Delivery" ? "60%" : "40%",
+                                        transform: "translate(-50%, -50%)"
+                                    }}
+                                >
+                                    <div className="relative">
+                                        <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                                            <Bike size={24} className="text-white" />
+                                        </div>
+                                        <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full whitespace-nowrap">
+                                            {order.delivery_partner_name || "Driver"}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                {/* Route line indicator */}
+                                <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
+                                    <line 
+                                        x1="30%" 
+                                        y1="40%" 
+                                        x2={order.orderStatus === "Out for Delivery" ? "70%" : "50%"}
+                                        y2={order.orderStatus === "Out for Delivery" ? "60%" : "50%"}
+                                        stroke="#f97316" 
+                                        strokeWidth="3" 
+                                        strokeDasharray="8,4"
+                                        className="animate-pulse"
+                                    />
+                                </svg>
+                            </div>
+                        )}
+                        
+                        {/* Restaurant Marker */}
+                        <div className="absolute top-4 left-4 bg-white rounded-lg shadow-md px-3 py-2 flex items-center gap-2">
+                            <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                            <span className="text-xs font-medium text-gray-700">{order.restaurant_name || "Restaurant"}</span>
+                        </div>
+                        
+                        {/* Delivery Address Marker */}
+                        <div className="absolute bottom-4 right-4 bg-white rounded-lg shadow-md px-3 py-2 flex items-center gap-2">
+                            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                            <span className="text-xs font-medium text-gray-700">Your Location</span>
+                        </div>
+                        
+                        <div className="absolute bottom-2 left-2 bg-white px-2 py-1 text-xs font-bold rounded shadow text-gray-600">
+                            🗺️ Live Tracking
                         </div>
                     </div>
                 )}
 
+                {/* Order Status Timeline */}
+                <div className="bg-white p-6 border-b border-gray-100 shadow-sm">
+                    <h2 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4">Order Status</h2>
+                    
+                    {(() => {
+                        const statusFlow = [
+                            { status: 'Placed', label: 'Order Placed', icon: CheckCircle, description: 'Your order has been placed successfully' },
+                            { status: 'Preparing', label: 'Being Prepared', icon: ChefHat, description: 'Restaurant is preparing your food' },
+                            { status: 'Ready for Dispatch', label: 'Ready for Pickup', icon: Package, description: 'Food is ready, waiting for driver' },
+                            { status: 'Looking for Driver', label: 'Finding Driver', icon: Truck, description: 'Searching for available delivery partner' },
+                            { status: 'Assigned to Driver', label: 'Driver Assigned', icon: Truck, description: 'Delivery partner is on the way to restaurant' },
+                            { status: 'Out for Delivery', label: 'Out for Delivery', icon: Truck, description: 'Your order is on the way!' },
+                            { status: 'Delivered', label: 'Delivered', icon: CheckCircle, description: 'Order delivered successfully' },
+                        ];
+                        
+                        const currentIndex = statusFlow.findIndex(s => s.status === order.orderStatus);
+                        const isCancelled = order.orderStatus === 'Cancelled';
+                        
+                        if (isCancelled) {
+                            return (
+                                <div className="flex items-center gap-3 p-4 bg-red-50 rounded-xl">
+                                    <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                                        <XCircle size={20} className="text-red-600" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-red-700">Order Cancelled</p>
+                                        <p className="text-sm text-red-600">This order has been cancelled</p>
+                                    </div>
+                                </div>
+                            );
+                        }
+                        
+                        return (
+                            <div className="space-y-0">
+                                {statusFlow.map((step, index) => {
+                                    const isCompleted = index <= currentIndex;
+                                    const isCurrent = index === currentIndex;
+                                    const IconComponent = step.icon;
+                                    
+                                    // Only show up to current status
+                                    if (index > currentIndex && !isCompleted) return null;
+                                    
+                                    return (
+                                        <div key={step.status} className="flex items-start gap-3 relative">
+                                            {/* Connecting line */}
+                                            {index < currentIndex && (
+                                                <div className="absolute left-[18px] top-10 w-0.5 h-6 bg-green-500"></div>
+                                            )}
+                                            
+                                            {/* Icon */}
+                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 ${
+                                                isCurrent 
+                                                    ? 'bg-green-500 text-white animate-pulse' 
+                                                    : isCompleted 
+                                                        ? 'bg-green-100 text-green-600' 
+                                                        : 'bg-gray-100 text-gray-400'
+                                            }`}>
+                                                <IconComponent size={20} />
+                                            </div>
+                                            
+                                            {/* Content */}
+                                            <div className="flex-1 pb-6">
+                                                <p className={`font-bold ${isCurrent ? 'text-green-600' : 'text-gray-800'}`}>
+                                                    {step.label}
+                                                </p>
+                                                <p className="text-sm text-gray-500">{step.description}</p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        );
+                    })()}
+                </div>
+
                 {/* Tracking Details */}
                 <div className="bg-white p-6 pb-8 border-b border-gray-100 shadow-sm">
                     {/* Origin destination route */}
+                    <h2 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4">Delivery Details</h2>
                     <div className="relative pl-6 space-y-6">
                         {/* Line connecting the icons */}
                         <div className="absolute left-[11px] top-4 bottom-6 border-l-2 border-dashed border-gray-300"></div>
@@ -145,9 +290,9 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                             <div className="absolute -left-6 bg-white w-[22px] h-[22px] flex items-center justify-center">
                                 <MapPin size={16} className="text-gray-400" />
                             </div>
-                            <h3 className="font-bold text-orange-500 text-base">BistroByte</h3>
+                            <h3 className="font-bold text-orange-500 text-base">{order.restaurant_name || 'BistroByte'}</h3>
                             <p className="text-sm text-gray-500 mt-1 line-clamp-2">
-                                LOCHAPADA, BERHAMPUR ODISHA, 760001
+                                {order.restaurantAddress || 'LOCHAPADA, BERHAMPUR'}, {order.restaurantCity || 'BERHAMPUR'} {order.restaurantState || 'ODISHA'}, {order.restaurantPincode || '760001'}
                             </p>
                         </div>
 
@@ -163,22 +308,30 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                             </p>
                         </div>
                     </div>
-
-                    <div className="mt-8 pt-6 border-t border-gray-100 flex items-start gap-4">
-                        <div className="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">
-                            <CheckCircle size={18} />
+                    
+                    {/* Delivery Partner Info */}
+                    {(order.orderStatus === "Assigned to Driver" || order.orderStatus === "Out for Delivery") && order.delivery_partner_name ? (
+                        <div className="mt-6 pt-6 border-t border-gray-100">
+                            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-3">Your Delivery Partner</h3>
+                            <div className="bg-indigo-50 rounded-xl p-4 flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
+                                    <User size={24} className="text-indigo-600" />
+                                </div>
+                                <div className="flex-1">
+                                    <p className="font-bold text-gray-900">{order.delivery_partner_name}</p>
+                                    <p className="text-sm text-gray-500">{order.delivery_partner_vehicle || "Delivery Partner"}</p>
+                                </div>
+                                {order.delivery_partner_phone ? (
+                                    <a 
+                                        href={`tel:${order.delivery_partner_phone}`}
+                                        className="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center hover:bg-indigo-700 transition-colors"
+                                    >
+                                        <Phone size={18} />
+                                    </a>
+                                ) : null}
+                            </div>
                         </div>
-                        <div>
-                            <p className="text-gray-800 text-sm font-medium">
-                                {order.orderStatus === "Delivered"
-                                    ? `Order delivered on ${new Date(order.createdAt).toLocaleDateString()}`
-                                    : `Order is currently ${order.orderStatus || 'in progress'}`}
-                            </p>
-                            {order.orderStatus === "Delivered" && (
-                                <p className="text-sm text-gray-500 mt-0.5">by delivery partner</p>
-                            )}
-                        </div>
-                    </div>
+                    ) : null}
                 </div>
 
                 {/* Bill Details */}

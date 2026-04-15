@@ -10,6 +10,7 @@ import { menuData, MenuItem } from "@/lib/menuData";
 import { useCart } from "@/context/CartContext";
 import { SignInButton, UserButton, Show } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
+import NotificationBell from "./NotificationBell";
 
 const navLinks = [
   { label: "home", href: "/", isRoute: true },
@@ -130,6 +131,9 @@ export default function Navbar() {
             >
               <Search size={20} strokeWidth={1.8} />
             </button>
+
+            {/* Notifications */}
+            <NotificationBell />
 
             {/* Cart */}
             <Link

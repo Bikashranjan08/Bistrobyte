@@ -12,6 +12,76 @@ export interface MenuCategory {
   items: MenuItem[];
 }
 
+// Restaurant data with addresses
+export interface Restaurant {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  pincode: string;
+  phone?: string;
+  latitude?: number;
+  longitude?: number;
+}
+
+export const restaurants: Restaurant[] = [
+  {
+    id: "spice-garden",
+    name: "Spice Garden",
+    address: "LOCHAPADA, BERHAMPUR",
+    city: "BERHAMPUR",
+    state: "ODISHA",
+    pincode: "760001",
+    phone: "+91 9876543210",
+    latitude: 19.3175,
+    longitude: 84.7950
+  },
+  {
+    id: "biryani-house",
+    name: "Biryani House",
+    address: "ASOKA ROAD, NEAR BUS STAND",
+    city: "BERHAMPUR",
+    state: "ODISHA",
+    pincode: "760001",
+    phone: "+91 9876543211",
+    latitude: 19.3200,
+    longitude: 84.8000
+  },
+  {
+    id: "pizza-hut",
+    name: "Pizza Hut",
+    address: "GANJAM ROAD, OPPOSITE MEDICAL COLLEGE",
+    city: "BERHAMPUR",
+    state: "ODISHA",
+    pincode: "760001",
+    phone: "+91 9876543212",
+    latitude: 19.3150,
+    longitude: 84.7900
+  },
+  {
+    id: "chinese-corner",
+    name: "Chinese Corner",
+    address: "ENGINEERING SCHOOL ROAD",
+    city: "BERHAMPUR",
+    state: "ODISHA",
+    pincode: "760001",
+    phone: "+91 9876543213",
+    latitude: 19.3250,
+    longitude: 84.8050
+  }
+];
+
+// Helper function to get restaurant by ID
+export function getRestaurantById(id: string): Restaurant | undefined {
+  return restaurants.find(r => r.id === id);
+}
+
+// Helper function to get full address string
+export function getRestaurantFullAddress(restaurant: Restaurant): string {
+  return `${restaurant.address}, ${restaurant.city} ${restaurant.state}, ${restaurant.pincode}`;
+}
+
 export const menuData: MenuCategory[] = [
   {
     id: "soups",

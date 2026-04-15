@@ -1,20 +1,27 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { MenuItem } from "@/lib/menuData";
 
-export interface CartItem extends MenuItem {
+export interface CartItem {
+    foodItemId: string;
+    name: string;
+    price: number;
     quantity: number;
+    restaurantId: string;
+    restaurantName: string;
+    image: string;
+    isVeg: boolean;
 }
 
 interface CartContextType {
     cartItems: CartItem[];
-    addToCart: (item: MenuItem) => void;
-    removeFromCart: (itemName: string) => void;
-    updateQuantity: (itemName: string, delta: number) => void;
+    addToCart: (item: CartItem) => void;
+    removeFromCart: (foodItemId: string, restaurantId: string) => void;
+    updateQuantity: (foodItemId: string, restaurantId: string, delta: number) => void;
     clearCart: () => void;
     cartTotal: number;
     cartCount: number;
+    getCartItemsByRestaurant: () => { [restaurantId: string]: CartItem[] };
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -39,32 +46,45 @@ export function CartProvider({ children }: { children: ReactNode }) {
         localStorage.setItem("bistrobyte-cart", JSON.stringify(cartItems));
     }, [cartItems]);
 
-    const addToCart = (item: MenuItem) => {
+    const addToCart = (item: CartItem) => {
         setCartItems((prev) => {
-            const existing = prev.find((i) => i.name === item.name);
+            // Check if item from same restaurant already exists
+            const existing = prev.find((i) => i.foodItemId === item.foodItemId && i.restaurantId === item.restaurantId);
             if (existing) {
                 return prev.map((i) =>
-                    i.name === item.name ? { ...i, quantity: i.quantity + 1 } : i
+                    i.foodItemId === item.foodItemId && i.restaurantId === item.restaurantId
+                        ? { ...i, quantity: i.quantity + 1 }
+                        : i
                 );
             }
             return [...prev, { ...item, quantity: 1 }];
         });
     };
 
-    const removeFromCart = (itemName: string) => {
-        setCartItems((prev) => prev.filter((i) => i.name !== itemName));
+    const removeFromCart = (foodItemId: string, restaurantId: string) => {
+        setCartItems((prev) => prev.filter((i) => !(i.foodItemId === foodItemId && i.restaurantId === restaurantId)));
     };
 
-    const updateQuantity = (itemName: string, delta: number) => {
+    const updateQuantity = (foodItemId: string, restaurantId: string, delta: number) => {
         setCartItems((prev) => {
             return prev.map((item) => {
-                if (item.name === itemName) {
+                if (item.foodItemId === foodItemId && item.restaurantId === restaurantId) {
                     const newQty = Math.max(0, item.quantity + delta);
                     return { ...item, quantity: newQty };
                 }
                 return item;
             }).filter((item) => item.quantity > 0);
         });
+    };
+
+    const getCartItemsByRestaurant = () => {
+        return cartItems.reduce((acc, item) => {
+            if (!acc[item.restaurantId]) {
+                acc[item.restaurantId] = [];
+            }
+            acc[item.restaurantId].push(item);
+            return acc;
+        }, {} as { [restaurantId: string]: CartItem[] });
     };
 
     const clearCart = () => {
@@ -84,6 +104,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
                 clearCart,
                 cartTotal,
                 cartCount,
+                getCartItemsByRestaurant,
             }}
         >
             {children}
