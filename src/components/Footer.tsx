@@ -129,9 +129,7 @@ export default function Footer() {
                   className="text-white/70 text-sm leading-relaxed"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
-                  Avamment Road,
-                  <br />
-                  BistroByte, IL-98001
+                  Berhampur, Odisha
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -140,7 +138,7 @@ export default function Footer() {
                   className="text-white/70 text-sm"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
-                  +1 291 565 7788
+                  7008660169
                 </p>
               </div>
             </div>
